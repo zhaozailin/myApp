@@ -1,27 +1,55 @@
-import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import Taro, {Component} from '@tarojs/taro'
+import {View, Text, Button} from '@tarojs/components'
 import './index.less'
 
 export default class Index extends Component {
-
-  config = {
-    navigationBarTitleText: '首页'
+  state = {
   }
 
-  componentWillMount () { }
+  config = {
+    navigationBarTitleText: '授权'
+  }
 
-  componentDidMount () { }
+  componentWillMount() {
+    // 判断用户是否已经授权
+    Taro.getSetting().then((res) => {
+      // 已授权
+      if (res.authSetting['scope.userInfo']) {
+        Taro.redirectTo({
+          url: '/pages/main/index'
+        })
+      }
+    })
+  }
 
-  componentWillUnmount () { }
+  componentDidMount() {
+  }
 
-  componentDidShow () { }
+  componentWillUnmount() {
+  }
 
-  componentDidHide () { }
+  componentDidShow() {
+  }
 
-  render () {
+  componentDidHide() {
+  }
+
+  enter = () => {
+    Taro.getUserInfo().then(() => {
+      Taro.redirectTo({
+        url: '/pages/main/index'
+      })
+    }, () => {
+      Taro.showToast({title: '请先进行授权操作', icon: 'none'})
+    })
+  }
+
+  render() {
     return (
-      <View className='index'>
-        <Text>Hello world!</Text>
+      <View className='auth-wrap'>
+        <Button className='auth-btn' openType='getUserInfo'>授权</Button>
+        <Text className='auth-info'>如已授权，点击进入按钮</Text>
+        <Button className='auth-enter-btn' type='primary' onClick={this.enter}>点击进入</Button>
       </View>
     )
   }
