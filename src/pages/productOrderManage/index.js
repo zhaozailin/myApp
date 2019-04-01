@@ -4,7 +4,7 @@ import { AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 import MyOrderList from "../myOrderList";
 
-export default class ProductOrderManager extends Component {
+export default class ProductOrderManage extends Component {
   state = {
     current: 0
   }

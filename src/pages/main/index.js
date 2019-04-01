@@ -1,7 +1,7 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text, Button} from '@tarojs/components'
 import { AtTabBar } from 'taro-ui'
-import ProductOrderManager from '../productOrderManager'
+import ProductOrderManage from '../productOrderManage'
 import './index.less'
 
 export default class Main extends Component {
@@ -33,7 +33,7 @@ export default class Main extends Component {
   render() {
     return (
       <View className='m-wrap'>
-        {this.state.current === 0 && <ProductOrderManager/>}
+        {this.state.current === 0 && <ProductOrderManage/>}
         <AtTabBar
           fixed
           tabList={[
