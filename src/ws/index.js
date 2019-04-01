@@ -1,11 +1,10 @@
-import WebSocketAsPromised from "websocket-as-promised";
-import {getLength} from "../utils/math";
+import Taro from '@tarojs/taro'
 
-const wsp = new WebSocketAsPromised('ws://47.110.242.98:5505', {
-    packMessage: data => data,
-    unpackMessage: message => message,
-    attachRequestId: (data, requestId) => requestId + getLength(JSON.stringify(data))+ JSON.stringify(data), // attach requestId to message as `id` field
-    extractRequestId: message => message && message.substring(0, 4),                                  // read requestId from message `id` field
-});
-
-export default wsp;
+export const createWs = () => {
+  return Taro.connectSocket({
+    url: 'ws://47.110.242.98:5505',
+    success: function () {
+      console.log('connect success')
+    }
+  });
+}

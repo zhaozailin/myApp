@@ -16,7 +16,7 @@ export default class MyOrderList extends Component {
 
   componentDidMount() {
     queryOrderList({
-      shopId: window.global.shopId || 1
+      shopId: Taro.getStorageSync('shopId')
     }).then((list) => {
       this.setState({
         list

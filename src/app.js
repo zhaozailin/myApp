@@ -23,7 +23,10 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    // 暂时写在这里，后续会写到登录里
+    Taro.setStorageSync('shopId', 1)
+  }
 
   componentDidShow () {}
 

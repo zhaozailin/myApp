@@ -6,5 +6,3 @@ export const getLength = (str) => {
     }
     return lengthStr;
 }
-
-window.x = getLength;
