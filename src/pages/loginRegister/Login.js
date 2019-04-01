@@ -16,7 +16,6 @@ export default class Login extends Component {
   }
 
   componentDidMount() {
-
   }
 
   componentWillUnmount() {
@@ -58,7 +57,7 @@ export default class Login extends Component {
         username: this.state.username,
         password: this.state.password
       }).then(() => {
-        Taro.showToast({title: '注册成功', icon: 'none'})
+        Taro.showToast({title: '登录成功', icon: 'none'})
         Taro.redirectTo({
           url: '/pages/main/index'
         })
@@ -68,7 +67,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View className='login-wrap'>
+      <View className='tab-content'>
         <AtInput
           clear
           title='账号'

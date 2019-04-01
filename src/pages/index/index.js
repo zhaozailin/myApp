@@ -1,6 +1,7 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text, Button} from '@tarojs/components'
 import './index.less'
+import LoginRegister from "../loginRegister";
 
 export default class Index extends Component {
   state = {
@@ -20,10 +21,10 @@ export default class Index extends Component {
         // Taro.redirectTo({
         //   url: '/pages/main/index'
         // })
-        
+
         // 未登录
         Taro.redirectTo({
-          url: '/pages/login/index'
+          url: '/pages/loginRegister/index'
         })
       }
     })
