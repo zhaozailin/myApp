@@ -9,7 +9,7 @@ export default class Main extends Component {
     current: 0,
   }
   config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '工单管理'
   }
 
   componentDidMount() {

@@ -3,6 +3,9 @@ import { View } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 import MyOrderList from "../myOrderList";
+import MySubscribeList from "../mySubscribeList";
+import ChargeRecordList from "../chargeRecordList";
+import ConsumeRecordList from "../consumeRecordList";
 
 export default class ProductOrderManage extends Component {
   state = {
@@ -40,13 +43,13 @@ export default class ProductOrderManage extends Component {
             <MyOrderList/>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
-            <View style='padding: 100px 50px;background-color: #FAFBFC;text-align: center;'>标签页二的内容</View>
+            <MySubscribeList/>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
-            <View style='padding: 100px 50px;background-color: #FAFBFC;text-align: center;'>标签页三的内容</View>
+            <ChargeRecordList/>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={3}>
-            <View style='padding: 100px 50px;background-color: #FAFBFC;text-align: center;'>标签页三的内容</View>
+            <ConsumeRecordList/>
           </AtTabsPane>
         </AtTabs>
       </View>
