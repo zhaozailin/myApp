@@ -1,12 +1,13 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import 'taro-ui/dist/style/index.scss'
-import {AtCard, AtButton} from 'taro-ui'
+import {AtCard, AtButton, AtSearchBar} from 'taro-ui'
 import {querySubscribeList} from '../../request/productOrderManage'
 import './index.less'
 
 export default class MySubscribeList extends Component {
   state = {
+    searchkey: '',
     list: []
   }
 
@@ -24,6 +25,17 @@ export default class MySubscribeList extends Component {
     })
   }
 
+  search = () => {
+    let key = this.state.searchkey;
+    console.log(key);
+  }
+
+  changeSearchInput = (searchkey) => {
+    this.setState({
+      searchkey
+    })
+  }
+
   componentWillUnmount() {
   }
 
@@ -36,6 +48,11 @@ export default class MySubscribeList extends Component {
   render() {
     return (
       <View className='mol-wrap'>
+        <AtSearchBar
+          value={this.state.searchkey}
+          onChange={this.changeSearchInput}
+          onActionClick={this.search}
+        />
         {
           this.state.list.map(ele => {
             return (

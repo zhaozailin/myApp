@@ -1,13 +1,14 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import 'taro-ui/dist/style/index.scss'
-import {AtCard, AtButton} from 'taro-ui'
+import {AtCard, AtButton, AtSearchBar} from 'taro-ui'
 import {queryOrderList} from '../../request/productOrderManage'
 import './index.less'
 
 export default class MyOrderList extends Component {
   state = {
-    list: []
+    searchkey: '',
+    list: [],
   }
 
   config = {
@@ -16,7 +17,7 @@ export default class MyOrderList extends Component {
 
   componentDidMount() {
     queryOrderList({
-      shopId: Taro.getStorageSync('shopId')
+      uId: Taro.getStorageSync('uId')
     }).then((list) => {
       this.setState({
         list
@@ -33,9 +34,25 @@ export default class MyOrderList extends Component {
   componentDidHide() {
   }
 
+  search = () => {
+    let key = this.state.searchkey;
+    console.log(key);
+  }
+
+  changeSearchInput = (searchkey) => {
+    this.setState({
+      searchkey
+    })
+  }
+
   render() {
     return (
       <View className='mol-wrap'>
+        <AtSearchBar
+          value={this.state.searchkey}
+          onChange={this.changeSearchInput}
+          onActionClick={this.search}
+        />
         {
           this.state.list.map(ele => {
             return (
