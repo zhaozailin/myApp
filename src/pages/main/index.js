@@ -1,9 +1,13 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text, Button} from '@tarojs/components'
+import { AtTabBar } from 'taro-ui'
+import ProductOrderManager from '../productOrderManager'
 import './index.less'
 
 export default class Main extends Component {
-
+  state = {
+    current: 0,
+  }
   config = {
     navigationBarTitleText: '首页'
   }
@@ -20,15 +24,26 @@ export default class Main extends Component {
   componentDidHide() {
   }
 
+  handleClick = (value) => {
+    this.setState({
+      current: value
+    })
+  }
+
   render() {
     return (
       <View className='m-wrap'>
-        <Text>首页</Text>
-        <View className='m-bottom-wrap'>
-          <Button type='primary' size='mini'>工单管理</Button>
-          <Button type='primary' size='mini' className='m-bottom-btn'>门店管理</Button>
-          <Button type='primary' size='mini' className='m-bottom-btn'>我的</Button>
-        </View>
+        {this.state.current === 0 && <ProductOrderManager/>}
+        <AtTabBar
+          fixed
+          tabList={[
+            { title: '工单管理', iconType: 'bullet-list' },
+            { title: '门店管理', iconType: 'shopping-bag-2' },
+            { title: '我的', iconType: 'user' }
+          ]}
+          onClick={this.handleClick.bind(this)}
+          current={this.state.current}
+        />
       </View>
     )
   }
