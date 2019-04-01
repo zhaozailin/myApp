@@ -15,8 +15,15 @@ export default class Index extends Component {
     Taro.getSetting().then((res) => {
       // 已授权
       if (res.authSetting['scope.userInfo']) {
+
+        // 已登录
+        // Taro.redirectTo({
+        //   url: '/pages/main/index'
+        // })
+        
+        // 未登录
         Taro.redirectTo({
-          url: '/pages/main/index'
+          url: '/pages/login/index'
         })
       }
     })
