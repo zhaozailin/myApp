@@ -2,8 +2,6 @@ import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
-import MySubscribeList from "../mySubscribeList";
-import ChargeRecordList from "../chargeRecordList";
 import ShopListManage from "../shopListManage";
 
 export default class ShopProductManage extends Component {
@@ -42,10 +40,8 @@ export default class ShopProductManage extends Component {
             <ShopListManage/>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
-            <MySubscribeList/>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
-            <ChargeRecordList/>
           </AtTabsPane>
         </AtTabs>
       </View>

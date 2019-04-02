@@ -8,7 +8,7 @@ import ShopProductManage from "../shopProductManage";
 
 export default class Main extends Component {
   state = {
-    current: 0,
+    current: 1,
   }
   config = {
     navigationBarTitleText: '工单管理'
@@ -35,9 +35,9 @@ export default class Main extends Component {
   render() {
     return (
       <View className='m-wrap'>
-        {this.state.current === 0 && <ProductOrderManage/>}
-        {this.state.current === 2 && <MyShop/>}
-        {this.state.current === 3 && <ShopProductManage/>}
+        {/*{this.state.current === 0 && <ProductOrderManage/>}*/}
+        {this.state.current === 1 && <ShopProductManage/>}
+        {/*{this.state.current === 2 && <MyShop/>}*/}
         <AtTabBar
           fixed
           tabList={[
