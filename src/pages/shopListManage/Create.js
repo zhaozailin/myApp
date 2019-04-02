@@ -66,6 +66,11 @@ export default class Create extends Component {
         <View className='slm-btn-wrap'>
           <AtButton type='primary' onClick={this.toSave}>保存</AtButton>
         </View>
+        <View className='slm-return-btn-wrap'>
+          <AtButton type='secondary' onClick={() => {
+            this.props.back();
+          }}>返回</AtButton>
+        </View>
       </View>
     )
   }
