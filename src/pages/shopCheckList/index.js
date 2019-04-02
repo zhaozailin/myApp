@@ -2,21 +2,21 @@ import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import 'taro-ui/dist/style/index.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
-import {queryShopList} from '../../request/shopProductManage'
+import {queryShopCheckList} from '../../request/shopProductManage'
 import './index.less'
 
-export default class List extends Component {
+export default class ShopCheckList extends Component {
   state = {
     searchkey: '',
     list: []
   }
 
   config = {
-    navigationBarTitleText: '门店管理'
+    navigationBarTitleText: '门店审核'
   }
 
   componentDidMount() {
-    queryShopList({
+    queryShopCheckList({
       uId: Taro.getStorageSync('uId')
     }).then((list) => {
       this.setState({
@@ -38,12 +38,7 @@ export default class List extends Component {
 
   render() {
     return (
-      <View>
-        <View className='slm-btn-wrap'>
-          <AtButton type='primary' onClick={() => {
-            this.props.showCreate();
-          }}>添加</AtButton>
-        </View>
+      <View className='mol-wrap'>
         <AtSearchBar
           value={this.state.searchkey}
           onChange={this.changeSearchInput}
@@ -65,7 +60,7 @@ export default class List extends Component {
                       <View>门店编号：{ele.id}</View>
                     </View>
                     <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small'>{ele.status ? '禁用' : '启用'}</AtButton>
+                      <AtButton type='primary' size='small'>通过</AtButton>
                     </View>
                   </View>
                 </AtCard>
