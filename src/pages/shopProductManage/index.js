@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 import ShopListManage from "../shopListManage";
+import EmployeListManage from "../employeListManage";
 import ShopCheckList from "../shopCheckList";
 
 export default class ShopProductManage extends Component {
@@ -12,18 +13,6 @@ export default class ShopProductManage extends Component {
 
   config = {
     navigationBarTitleText: '门店管理'
-  }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentDidShow() {
-  }
-
-  componentDidHide() {
   }
 
   handleClick = (value) => {
@@ -44,6 +33,7 @@ export default class ShopProductManage extends Component {
             <ShopCheckList/>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
+            <EmployeListManage/>
           </AtTabsPane>
         </AtTabs>
       </View>

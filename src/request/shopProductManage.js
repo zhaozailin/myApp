@@ -130,3 +130,56 @@ export const queryShopCheckList = (params) => {
   })
 }
 
+// 查询员工列表
+export const queryEmployeList = (params) => {
+  if (mock) {
+    return Promise.resolve([
+      {
+        id: 1,
+        name: '员工1',
+        identity_cards: '13092112020202020X',
+        phone: '15068139393',
+        active_status: 1,
+      },
+      {
+        id: 2,
+        name: '员工2',
+        identity_cards: '13092112020202020X',
+        phone: '15068139393',
+        active_status: 0,
+      },
+      {
+        id: 3,
+        name: '员工3',
+        identity_cards: '13092112020202020X',
+        phone: '15068139393',
+        active_status: 1,
+      },
+      {
+        id: 4,
+        name: '员工4',
+        identity_cards: '13092112020202020X',
+        phone: '15068139393',
+        active_status: 0,
+      },
+      {
+        id: 5,
+        name: '员工5',
+        identity_cards: '13092112020202020X',
+        phone: '15068139393',
+        active_status: 0,
+      },
+    ]);
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result));
+        task.close();
+      })
+    })
+  })
+}
