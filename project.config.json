@@ -28,12 +28,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "首页",
 					"pathName": "pages/main/index",
+					"query": "shopId=1",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/shopProductManage/index",
 					"query": "shopId=1",
 					"scene": "1011"
 				}

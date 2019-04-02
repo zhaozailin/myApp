@@ -4,6 +4,7 @@ import { AtTabBar } from 'taro-ui'
 import ProductOrderManage from '../productOrderManage'
 import './index.less'
 import MyShop from "../myShop";
+import ShopProductManage from "../shopProductManage";
 
 export default class Main extends Component {
   state = {
@@ -36,6 +37,7 @@ export default class Main extends Component {
       <View className='m-wrap'>
         {this.state.current === 0 && <ProductOrderManage/>}
         {this.state.current === 2 && <MyShop/>}
+        {this.state.current === 3 && <ShopProductManage/>}
         <AtTabBar
           fixed
           tabList={[
