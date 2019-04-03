@@ -14,5 +14,17 @@ module.exports = {
      *     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
      * }
      */
+  },
+  csso: {
+    enable: true,
+    config: {
+      // 配置项同 https://github.com/css/csso#minifysource-options
+    }
+  },
+  uglify: {
+    enable: true,
+    config: {
+      // 配置项同 https://github.com/mishoo/UglifyJS2#minify-options
+    }
   }
 }

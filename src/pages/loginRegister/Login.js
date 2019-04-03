@@ -1,6 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import 'taro-ui/dist/style/index.scss'
 import {AtInput, AtButton} from 'taro-ui'
 import {login} from '../../request/user'
 import './index.less'
@@ -13,18 +12,6 @@ export default class Login extends Component {
 
   config = {
     navigationBarTitleText: '登录'
-  }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentDidShow() {
-  }
-
-  componentDidHide() {
   }
 
   changeUsername = (username) => {

@@ -1,6 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import 'taro-ui/dist/style/index.scss'
 import List from './List'
 import Create from './Create'
 import './index.less'

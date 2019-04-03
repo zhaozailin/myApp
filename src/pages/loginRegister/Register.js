@@ -1,6 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
-import 'taro-ui/dist/style/index.scss'
 import {AtInput, AtButton, AtFloatLayout, AtInputNumber} from 'taro-ui'
 import {login} from '../../request/user'
 import './index.less'
@@ -20,18 +19,6 @@ export default class Register extends Component {
 
   config = {
     navigationBarTitleText: '注册'
-  }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentDidShow() {
-  }
-
-  componentDidHide() {
   }
 
   changeName = (name) => {

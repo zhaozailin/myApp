@@ -1,6 +1,5 @@
-import Taro, {Component} from '@tarojs/taro'
+import {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import 'taro-ui/dist/style/index.scss'
 import List from './List'
 import Create from './Create'
 import './index.less'
@@ -12,9 +11,6 @@ export default class ShopListManage extends Component {
 
   config = {
     navigationBarTitleText: '门店管理'
-  }
-
-  componentDidMount() {
   }
 
   render() {

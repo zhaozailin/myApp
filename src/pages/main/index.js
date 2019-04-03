@@ -1,5 +1,5 @@
-import Taro, {Component} from '@tarojs/taro'
-import {View, Text, Button} from '@tarojs/components'
+import {Component} from '@tarojs/taro'
+import {View} from '@tarojs/components'
 import { AtTabBar } from 'taro-ui'
 import ProductOrderManage from '../productOrderManage'
 import './index.less'
@@ -14,18 +14,6 @@ export default class Main extends Component {
     navigationBarTitleText: '工单管理'
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentDidShow() {
-  }
-
-  componentDidHide() {
-  }
-
   handleClick = (value) => {
     this.setState({
       current: value
@@ -35,9 +23,9 @@ export default class Main extends Component {
   render() {
     return (
       <View className='m-wrap'>
-        {/*{this.state.current === 0 && <ProductOrderManage/>}*/}
+        {this.state.current === 0 && <ProductOrderManage/>}
         {this.state.current === 1 && <ShopProductManage/>}
-        {/*{this.state.current === 2 && <MyShop/>}*/}
+        {this.state.current === 2 && <MyShop/>}
         <AtTabBar
           fixed
           tabList={[

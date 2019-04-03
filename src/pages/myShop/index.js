@@ -1,6 +1,5 @@
-import Taro, {Component} from '@tarojs/taro'
+import {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import 'taro-ui/dist/style/index.scss'
 import {AtList, AtButton, AtListItem} from 'taro-ui'
 import './index.less'
 

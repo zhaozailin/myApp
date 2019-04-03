@@ -183,3 +183,62 @@ export const queryEmployeList = (params) => {
     })
   })
 }
+
+// 查询产品列表
+export const queryProducList = (params) => {
+  if (mock) {
+    return Promise.resolve([
+      {
+        id: 1,
+        name: '洗澡1',
+        url: 'http://xxx',
+        count: 10,
+        price: 168,
+        active_status: 0,
+      },
+      {
+        id: 2,
+        name: '洗澡2',
+        url: 'http://xxx',
+        count: 10,
+        price: 168,
+        active_status: 1,
+      },
+      {
+        id: 3,
+        name: '洗澡3',
+        url: 'http://xxx',
+        count: 10,
+        price: 168,
+        active_status: 0,
+      },
+      {
+        id: 4,
+        name: '洗澡4',
+        url: 'http://xxx',
+        count: 10,
+        price: 168,
+        active_status: 1,
+      },
+      {
+        id: 5,
+        name: '洗澡5',
+        url: 'http://xxx',
+        count: 10,
+        price: 168,
+        active_status: 1,
+      },
+    ]);
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result));
+        task.close();
+      })
+    })
+  })
+}

@@ -1,9 +1,10 @@
-import Taro, {Component} from '@tarojs/taro'
+import {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 import ShopListManage from "../shopListManage";
 import EmployeListManage from "../employeListManage";
+import ProductListManage from "../productListManage";
 import ShopCheckList from "../shopCheckList";
 
 export default class ShopProductManage extends Component {
@@ -34,6 +35,9 @@ export default class ShopProductManage extends Component {
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
             <EmployeListManage/>
+          </AtTabsPane>
+          <AtTabsPane current={this.state.current} index={3}>
+            <ProductListManage/>
           </AtTabsPane>
         </AtTabs>
       </View>

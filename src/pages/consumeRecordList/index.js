@@ -1,6 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import 'taro-ui/dist/style/index.scss'
 import {AtCard, AtSearchBar} from 'taro-ui'
 import {queryConsumeRecordList} from '../../request/productOrderManage'
 import './index.less'
@@ -36,15 +35,6 @@ export default class ConsumeRecordList extends Component {
     })
   }
 
-  componentWillUnmount() {
-  }
-
-  componentDidShow() {
-  }
-
-  componentDidHide() {
-  }
-
   render() {
     return (
       <View className='mol-wrap'>
@@ -60,15 +50,11 @@ export default class ConsumeRecordList extends Component {
                 <AtCard
                   title={ele.productName}
                 >
-                  <View className='at-row'>
-                    <View className='at-col at-col-10'>
-                      <View>微信昵称：{ele.name}</View>
-                      <View>手机：{ele.phone}</View>
-                      <View>消费金额：{ele.amount}</View>
-                      <View>操作员：{ele.operatorName}</View>
-                      <View>消费时间：{ele.customeTime}</View>
-                    </View>
-                  </View>
+                  <View>微信昵称：{ele.name}</View>
+                  <View>手机：{ele.phone}</View>
+                  <View>消费金额：{ele.amount}</View>
+                  <View>操作员：{ele.operatorName}</View>
+                  <View>消费时间：{ele.customeTime}</View>
                 </AtCard>
               </View>
             )

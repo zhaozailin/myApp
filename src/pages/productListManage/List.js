@@ -1,8 +1,8 @@
 import Taro, {Component} from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
-import {queryShopList} from '../../request/shopProductManage'
+import {queryProducList} from '../../request/shopProductManage'
 import './index.less'
 
 export default class List extends Component {
@@ -12,11 +12,11 @@ export default class List extends Component {
   }
 
   config = {
-    navigationBarTitleText: '门店管理'
+    navigationBarTitleText: '产品管理'
   }
 
   componentDidMount() {
-    queryShopList({
+    queryProducList({
       uId: Taro.getStorageSync('uId')
     }).then((list) => {
       this.setState({
@@ -36,14 +36,17 @@ export default class List extends Component {
     })
   }
 
+  upOrDown = (status, e) => {
+    e.stopPropagation()
+  }
+
+  toEdit = (ele) => {
+    this.props.showEdit(ele);
+  }
+
   render() {
     return (
       <View>
-        <View className='slm-btn-wrap'>
-          <AtButton type='primary' onClick={() => {
-            this.props.showCreate();
-          }}>添加</AtButton>
-        </View>
         <AtSearchBar
           value={this.state.searchkey}
           onChange={this.changeSearchInput}
@@ -52,20 +55,23 @@ export default class List extends Component {
         {
           this.state.list.map(ele => {
             return (
-              <View key={ele.id} className='mol-ele'>
+              <View key={ele.id} className='mol-ele' onClick={this.toEdit.bind(this, ele)}>
                 <AtCard
                   title={ele.name}
                 >
                   <View className='at-row'>
-                    <View className='at-col at-col-10'>
-                      <View>电话：{ele.phone}</View>
-                      <View>门店地址：{ele.addr}</View>
-                      <View>老板账号：{ele.account}</View>
-                      <View>过期日期：{ele.expiredate}</View>
-                      <View>门店编号：{ele.id}</View>
+                    <View className='at-col at-col-7'>
+                      <Image
+                        className='plm-img'
+                        src=''
+                        mode='widthFix' />
+                    </View>
+                    <View className='at-col at-col-3'>
+                      <View>单价：{ele.price}</View>
+                      <View>数量：{ele.count}</View>
                     </View>
                     <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small'>{ele.status ? '禁用' : '启用'}</AtButton>
+                      <AtButton type='primary' size='small' onClick={this.upOrDown.bind(this, ele.active_status)}>{ele.active_status ? '下架' : '上架'}</AtButton>
                     </View>
                   </View>
                 </AtCard>

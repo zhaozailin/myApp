@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import 'taro-ui/dist/style/index.scss'
+import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
 import {queryShopCheckList} from '../../request/shopProductManage'
 import './index.less'

@@ -3,15 +3,12 @@ import { View } from '@tarojs/components'
 import {AtInput, AtButton} from 'taro-ui'
 import './index.less'
 
-export default class Create extends Component {
+export default class Edit extends Component {
   state = {
   }
 
   config = {
-    navigationBarTitleText: '门店管理'
-  }
-
-  componentDidMount() {
+    navigationBarTitleText: '员工管理'
   }
 
   toSave = () => {
@@ -23,9 +20,9 @@ export default class Create extends Component {
       <View className='slm-create-wrap'>
         <AtInput
           clear
-          title='店长姓名'
+          title='员工姓名'
           type='text'
-          placeholder='请输入店长姓名'
+          placeholder='请输入员工姓名'
           value={this.state.name}
           onChange={this.changeName}
         />
@@ -33,7 +30,7 @@ export default class Create extends Component {
           clear
           title='身份证号'
           type='idcard'
-          placeholder='请输入店长身份证号'
+          placeholder='请输入员工身份证号'
           value={this.state.identity_cards}
           onChange={this.changeIdentity}
         />
@@ -45,23 +42,7 @@ export default class Create extends Component {
           value={this.state.phone}
           onChange={this.changePhone}
         />
-        <AtInput
-          clear
-          title='门店地址'
-          type='text'
-          placeholder='请输入门店地址'
-          value={this.state.shop_address}
-          onChange={this.changeAddress}
-        />
-        <AtInput
-          clear
-          title='门店名字'
-          type='text'
-          placeholder='请输入门店名字'
-          value={this.state.shop_name}
-          onChange={this.changeShop}
-        />
-        <View className='slm-btn-wrap'>
+        <View>
           <AtButton type='primary' onClick={this.toSave}>保存</AtButton>
         </View>
         <View className='slm-return-btn-wrap'>
