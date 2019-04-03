@@ -20,6 +20,8 @@ export default class Main extends Component {
     })
   }
 
+
+
   render() {
     return (
       <View className='m-wrap'>
