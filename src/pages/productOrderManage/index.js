@@ -23,6 +23,26 @@ export default class ProductOrderManage extends Component {
         ]
       })
     }
+    // 店长
+    else if (Taro.getStorageSync('auth') === 2) {
+      this.setState({
+        tabList: [
+          { title: '我的订单' },
+          { title: '我的预约' },
+          { title: '充值记录' },
+          { title: '消费记录' }
+        ]
+      })
+    }
+    // 员工
+    else if (Taro.getStorageSync('auth') === 3) {
+      this.setState({
+        tabList: [
+          { title: '我的预约' },
+          { title: '消费记录' }
+        ]
+      })
+    }
   }
 
   config = {
@@ -36,27 +56,24 @@ export default class ProductOrderManage extends Component {
   }
 
   render() {
-    // const tabList = [{ title: '我的订单' }, { title: '我的预约' }, { title: '充值记录' }, { title: '消费记录' }]
     return (
       <View className='pom-wrap'>
         <AtTabs fixed swipeable={false} current={this.state.current} tabList={this.state.tabList} onClick={this.handleClick}>
           <AtTabsPane current={this.state.current} index={0} >
             {Taro.getStorageSync('auth') === 1 &&  <ChargeRecordList/>}
             {Taro.getStorageSync('auth') === 2 &&  <MyOrderList/>}
-            {Taro.getStorageSync('auth') === 3 &&  <MyOrderList/>}
+            {Taro.getStorageSync('auth') === 3 &&  <MySubscribeList/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
             {Taro.getStorageSync('auth') === 1 &&  <ConsumeRecordList/>}
             {Taro.getStorageSync('auth') === 2 &&  <MySubscribeList/>}
-            {Taro.getStorageSync('auth') === 3 &&  <MySubscribeList/>}
+            {Taro.getStorageSync('auth') === 3 &&  <ConsumeRecordList/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
-            {Taro.getStorageSync('auth') === 2 &&  <MySubscribeList/>}
-            {Taro.getStorageSync('auth') === 3 &&  <MySubscribeList/>}
+            {Taro.getStorageSync('auth') === 2 &&  <ChargeRecordList/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={3}>
-            {Taro.getStorageSync('auth') === 2 &&  <MySubscribeList/>}
-            {Taro.getStorageSync('auth') === 3 &&  <MySubscribeList/>}
+            {Taro.getStorageSync('auth') === 2 &&  <ConsumeRecordList/>}
           </AtTabsPane>
         </AtTabs>
       </View>

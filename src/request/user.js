@@ -25,7 +25,7 @@ export const queryUserInfo = (params) => {
   if (mock) {
     return Promise.resolve({
       // 1-管理员，2-店长，3-员工
-      auth: 1,
+      auth: 3,
       shopId: 1
     });
   }

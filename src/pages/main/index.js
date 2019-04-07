@@ -29,8 +29,8 @@ export default class Main extends Component {
           ]
         })
       }
-      // 店长
-      else if (auth === 2) {
+      // 店长、员工
+      else if (auth === 2 || auth === 3) {
         this.setState({
           tabList: [
             { title: '工单管理', iconType: 'bullet-list' },
