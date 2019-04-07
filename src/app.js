@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   componentDidMount () {
-    // 暂时写在这里，后续会写到登录里
+    // FIXME 暂时写在这里，后续会写到登录里
     Taro.setStorageSync('uId', 1)
     Taro.setStorageSync('shopId', 1)
   }
