@@ -22,7 +22,7 @@ export default class EmployeListManage extends Component {
         {this.state.showList && <List showCreate={() => {
           this.setState({showList: false})
         }}/>}
-        {!this.state.showList && <Create back={() => {
+        {(!this.state.showList) && <Create back={() => {
           this.setState({showList: true})
         }}/>}
       </View>

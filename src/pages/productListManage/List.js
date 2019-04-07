@@ -41,7 +41,9 @@ export default class List extends Component {
   }
 
   toEdit = (ele) => {
-    this.props.showEdit(ele);
+    if (Taro.getStorageSync('auth') === 2) {
+      this.props.showEdit(ele);
+    }
   }
 
   render() {
@@ -70,9 +72,12 @@ export default class List extends Component {
                       <View>单价：{ele.price}</View>
                       <View>数量：{ele.count}</View>
                     </View>
-                    <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small' onClick={this.upOrDown.bind(this, ele.active_status)}>{ele.active_status ? '下架' : '上架'}</AtButton>
-                    </View>
+                    {
+                      Taro.getStorageSync('auth') === 2 &&
+                      <View className='at-col at-col-2'>
+                        <AtButton type='primary' size='small' onClick={this.upOrDown.bind(this, ele.active_status)}>{ele.active_status ? '下架' : '上架'}</AtButton>
+                      </View>
+                    }
                   </View>
                 </AtCard>
               </View>

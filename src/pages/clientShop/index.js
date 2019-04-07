@@ -1,22 +1,22 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
-import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
-import {queryEmployeList} from '../../request/shopProductManage'
+import {AtCard, AtSearchBar} from 'taro-ui'
+import {queryClientList} from '../../request/clientManage'
 import './index.less'
 
-export default class List extends Component {
+export default class ClientShop extends Component {
   state = {
     searchkey: '',
     list: []
   }
 
   config = {
-    navigationBarTitleText: '员工管理'
+    navigationBarTitleText: '客户管理'
   }
 
   componentDidMount() {
-    queryEmployeList({
+    queryClientList({
       uId: Taro.getStorageSync('uId')
     }).then((list) => {
       this.setState({
@@ -38,15 +38,7 @@ export default class List extends Component {
 
   render() {
     return (
-      <View>
-        {
-          Taro.getStorageSync('auth') !== 3 &&
-          <View className='slm-btn-wrap'>
-            <AtButton type='primary' onClick={() => {
-              this.props.showCreate();
-            }}>添加</AtButton>
-          </View>
-        }
+      <View className='cs-wrap'>
         <AtSearchBar
           value={this.state.searchkey}
           onChange={this.changeSearchInput}
@@ -55,21 +47,15 @@ export default class List extends Component {
         {
           this.state.list.map(ele => {
             return (
-              <View key={ele.id} className='mol-ele'>
+              <View key={ele.id} className='cs-ele'>
                 <AtCard
                   title={ele.name}
                 >
                   <View className='at-row'>
-                    <View className='at-col at-col-10'>
-                      <View>电话：{ele.phone}</View>
-                      <View>身份证号：{ele.identity_cards}</View>
+                    <View className='at-col at-col-12'>
+                      <View>手机：{ele.phone}</View>
+                      <View>所属门店：{ele.shop_name}</View>
                     </View>
-                    {
-                      Taro.getStorageSync('auth') !== 3 &&
-                      <View className='at-col at-col-2'>
-                        <AtButton type='primary' size='small'>{ele.active_status ? '禁用' : '启用'}</AtButton>
-                      </View>
-                    }
                   </View>
                 </AtCard>
               </View>

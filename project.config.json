@@ -4,11 +4,12 @@
 	"description": "母婴店铺端",
 	"appid": "wx792b9d6d0ae68086",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
-		"newFeature": true
+		"newFeature": true,
+		"autoAudits": false
 	},
 	"compileType": "miniprogram",
 	"condition": {
