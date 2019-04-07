@@ -8,6 +8,7 @@ import './index.less'
 export default class MyOrderList extends Component {
   state = {
     searchkey: '',
+    oriList: [],
     list: [],
   }
 
@@ -20,14 +21,25 @@ export default class MyOrderList extends Component {
       shopId: Taro.getStorageSync('shopId')
     }).then((list) => {
       this.setState({
-        list
+        list,
+        oriList: list
       })
     })
   }
 
   search = () => {
     let key = this.state.searchkey;
-    console.log(key);
+    if (key.trim()) {
+      let newList = [];
+      this.state.oriList.forEach((ele) => {
+        if (ele.name.indexOf(key) !== -1 || ele.phone === key) {
+          newList.push(ele);
+        }
+      })
+      this.setState({
+        list: [...newList]
+      })
+    }
   }
 
   changeSearchInput = (searchkey) => {

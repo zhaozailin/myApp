@@ -46,12 +46,22 @@ export default class Main extends Component {
     this.setState({
       current: value
     }, () => {
-      let url;
-      if (value === 1) {
-        Taro.setNavigationBarTitle({
-          title: 'xxxx'
-        })
+      let title = '';
+      if (value === 0) {
+        title = '工单管理';
       }
+      else if (value === 1) {
+        title = '门店管理';
+      }
+      else if (Taro.getStorageSync('auth') !== authCode.manager && value === 2) {
+        title = '我的门店';
+      }
+      else if (Taro.getStorageSync('auth') === authCode.manager && value === 2) {
+        title = '客户管理';
+      }
+      Taro.setNavigationBarTitle({
+        title
+      })
     })
   }
 
