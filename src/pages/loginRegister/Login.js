@@ -66,6 +66,7 @@ export default class Login extends Component {
           placeholder='请输入账号'
           value={this.state.username}
           onChange={this.changeUsername}
+          maxLength={11}
         />
         <AtInput
           clear

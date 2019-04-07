@@ -1,5 +1,5 @@
 export default {
   manager: 100,
-  shopOwner: 99,
+  shopOwner: 90,
   employe: 0,
 }
