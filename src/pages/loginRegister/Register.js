@@ -1,8 +1,9 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import {AtInput, AtButton, AtFloatLayout, AtInputNumber} from 'taro-ui'
-import {login} from '../../request/user'
+import {register} from '../../request/user'
 import './index.less'
+import {checkPhone} from "../../utils/validator";
 
 export default class Register extends Component {
   state = {
@@ -64,12 +65,20 @@ export default class Register extends Component {
       Taro.showToast({title: '手机号不能为空', icon: 'none'})
       return false;
     }
+    if (!checkPhone(this.state.phone)) {
+      Taro.showToast({title: '手机号格式不正确', icon: 'none'})
+      return false;
+    }
     if (!this.state.shop_address) {
       Taro.showToast({title: '门店地址不能为空', icon: 'none'})
       return false;
     }
     if (!this.state.referee_name) {
       Taro.showToast({title: '推荐人不能为空', icon: 'none'})
+      return false;
+    }
+    if (!checkPhone(this.state.referee_name)) {
+      Taro.showToast({title: '推荐人手机号格式不正确', icon: 'none'})
       return false;
     }
     if (!this.state.shop_name) {
@@ -80,18 +89,19 @@ export default class Register extends Component {
   }
 
   toRegister = () => {
-    // if (this.checkRegister()) {
-      login({
+    if (this.checkRegister()) {
+      register({
         name: this.state.name,
         identity_cards: this.state.identity_cards,
         phone: this.state.phone,
         shop_address: this.state.shop_address,
         referee_name: this.state.referee_name,
         shop_name: this.state.shop_name,
+        password: this.state.phone.slice(-4)
       }).then(() => {
         this.setState({payShow: true})
       })
-    // }
+    }
   }
 
   changeYearNum = (yearNum) => {

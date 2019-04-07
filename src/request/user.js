@@ -10,10 +10,29 @@ export const login = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2001')})
       });
       task.onMessage(result => {
         resolve(parseResult(result));
+        task.close();
+      })
+    })
+  })
+}
+
+// 注册
+export const register = (params) => {
+  let mock = false;
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2019')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result.data));
         task.close();
       })
     })

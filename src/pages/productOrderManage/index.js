@@ -6,6 +6,7 @@ import MyOrderList from "../myOrderList";
 import MySubscribeList from "../mySubscribeList";
 import ChargeRecordList from "../chargeRecordList";
 import ConsumeRecordList from "../consumeRecordList";
+import authCode from "../../config/authCode";
 
 export default class ProductOrderManage extends Component {
   state = {
@@ -15,7 +16,7 @@ export default class ProductOrderManage extends Component {
 
   componentDidMount = () => {
     // 管理员
-    if (Taro.getStorageSync('auth') === 1) {
+    if (Taro.getStorageSync('auth') === authCode.manager) {
       this.setState({
         tabList: [
           { title: '充值记录' },
@@ -24,7 +25,7 @@ export default class ProductOrderManage extends Component {
       })
     }
     // 店长
-    else if (Taro.getStorageSync('auth') === 2) {
+    else if (Taro.getStorageSync('auth') === authCode.shopOwner) {
       this.setState({
         tabList: [
           { title: '我的订单' },
@@ -35,7 +36,7 @@ export default class ProductOrderManage extends Component {
       })
     }
     // 员工
-    else if (Taro.getStorageSync('auth') === 3) {
+    else if (Taro.getStorageSync('auth') === authCode.employe) {
       this.setState({
         tabList: [
           { title: '我的预约' },
@@ -60,20 +61,20 @@ export default class ProductOrderManage extends Component {
       <View className='pom-wrap'>
         <AtTabs fixed swipeable={false} current={this.state.current} tabList={this.state.tabList} onClick={this.handleClick}>
           <AtTabsPane current={this.state.current} index={0} >
-            {Taro.getStorageSync('auth') === 1 &&  <ChargeRecordList/>}
-            {Taro.getStorageSync('auth') === 2 &&  <MyOrderList/>}
-            {Taro.getStorageSync('auth') === 3 &&  <MySubscribeList/>}
+            {Taro.getStorageSync('auth') === authCode.manager &&  <ChargeRecordList/>}
+            {Taro.getStorageSync('auth') === authCode.shopOwner &&  <MyOrderList/>}
+            {Taro.getStorageSync('auth') === authCode.employe &&  <MySubscribeList/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
-            {Taro.getStorageSync('auth') === 1 &&  <ConsumeRecordList/>}
-            {Taro.getStorageSync('auth') === 2 &&  <MySubscribeList/>}
-            {Taro.getStorageSync('auth') === 3 &&  <ConsumeRecordList/>}
+            {Taro.getStorageSync('auth') === authCode.manager &&  <ConsumeRecordList/>}
+            {Taro.getStorageSync('auth') === authCode.shopOwner &&  <MySubscribeList/>}
+            {Taro.getStorageSync('auth') === authCode.employe &&  <ConsumeRecordList/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
-            {Taro.getStorageSync('auth') === 2 &&  <ChargeRecordList/>}
+            {Taro.getStorageSync('auth') === authCode.shopOwner &&  <ChargeRecordList/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={3}>
-            {Taro.getStorageSync('auth') === 2 &&  <ConsumeRecordList/>}
+            {Taro.getStorageSync('auth') === authCode.shopOwner &&  <ConsumeRecordList/>}
           </AtTabsPane>
         </AtTabs>
       </View>

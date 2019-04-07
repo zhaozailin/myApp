@@ -43,8 +43,12 @@ export default class Login extends Component {
       login({
         username: this.state.username,
         password: this.state.password
-      }).then(() => {
+      }).then((result) => {
         Taro.showToast({title: '登录成功', icon: 'none'})
+
+        Taro.setStorageSync('auth', result.auth)
+        Taro.setStorageSync('shopId', result.shopId)
+
         Taro.redirectTo({
           url: '/pages/main/index'
         })

@@ -4,6 +4,7 @@ import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
 import {queryProducList} from '../../request/shopProductManage'
 import './index.less'
+import authCode from "../../config/authCode";
 
 export default class List extends Component {
   state = {
@@ -41,7 +42,7 @@ export default class List extends Component {
   }
 
   toEdit = (ele) => {
-    if (Taro.getStorageSync('auth') === 2) {
+    if (Taro.getStorageSync('auth') === authCode.shopOwner) {
       this.props.showEdit(ele);
     }
   }
@@ -73,7 +74,7 @@ export default class List extends Component {
                       <View>数量：{ele.count}</View>
                     </View>
                     {
-                      Taro.getStorageSync('auth') === 2 &&
+                      Taro.getStorageSync('auth') === authCode.shopOwner &&
                       <View className='at-col at-col-2'>
                         <AtButton type='primary' size='small' onClick={this.upOrDown.bind(this, ele.active_status)}>{ele.active_status ? '下架' : '上架'}</AtButton>
                       </View>
