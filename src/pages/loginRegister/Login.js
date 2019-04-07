@@ -41,7 +41,7 @@ export default class Login extends Component {
   toLogin = () => {
     if (this.checkLogin()) {
       login({
-        username: this.state.username,
+        phone: this.state.username,
         password: this.state.password
       }).then((result) => {
         Taro.showToast({title: '登录成功', icon: 'none'})

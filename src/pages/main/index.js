@@ -17,7 +17,7 @@ export default class Main extends Component {
   componentDidMount = () => {
 
     // 管理员
-    if (auth === authCode.manager) {
+    if (Taro.getStorageSync('auth') === authCode.manager) {
       this.setState({
         tabList: [
           { title: '工单管理', iconType: 'bullet-list' },
@@ -27,7 +27,7 @@ export default class Main extends Component {
       })
     }
     // 店长、员工
-    else if (auth === authCode.shopOwner || auth === authCode.employe) {
+    else if (Taro.getStorageSync('auth') === authCode.shopOwner || Taro.getStorageSync('auth') === authCode.employe) {
       this.setState({
         tabList: [
           { title: '工单管理', iconType: 'bullet-list' },
@@ -45,6 +45,13 @@ export default class Main extends Component {
   handleClick = (value) => {
     this.setState({
       current: value
+    }, () => {
+      let url;
+      if (value === 1) {
+        Taro.setNavigationBarTitle({
+          title: 'xxxx'
+        })
+      }
     })
   }
 

@@ -54,7 +54,7 @@ export const queryOrderList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })
@@ -113,7 +113,7 @@ export const querySubscribeList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })
@@ -177,7 +177,7 @@ export const queryChargeRecordList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })
@@ -246,7 +246,7 @@ export const queryConsumeRecordList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })

@@ -4,6 +4,7 @@ import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
 import {queryEmployeList} from '../../request/shopProductManage'
 import './index.less'
+import authCode from '../../config/authCode'
 
 export default class List extends Component {
   state = {
@@ -40,7 +41,7 @@ export default class List extends Component {
     return (
       <View>
         {
-          Taro.getStorageSync('auth') !== 3 &&
+          Taro.getStorageSync('auth') !== authCode.employe &&
           <View className='slm-btn-wrap'>
             <AtButton type='primary' onClick={() => {
               this.props.showCreate();
@@ -65,7 +66,7 @@ export default class List extends Component {
                       <View>身份证号：{ele.identity_cards}</View>
                     </View>
                     {
-                      Taro.getStorageSync('auth') !== 3 &&
+                      Taro.getStorageSync('auth') !== authCode.employe &&
                       <View className='at-col at-col-2'>
                         <AtButton type='primary' size='small'>{ele.active_status ? '禁用' : '启用'}</AtButton>
                       </View>

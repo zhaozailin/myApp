@@ -59,7 +59,7 @@ export const queryShopList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })
@@ -123,7 +123,7 @@ export const queryShopCheckList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })
@@ -177,7 +177,7 @@ export const queryEmployeList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })
@@ -236,7 +236,7 @@ export const queryProducList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })

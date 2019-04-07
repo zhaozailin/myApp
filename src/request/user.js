@@ -1,11 +1,15 @@
 import {createWs} from '../ws/index';
 import mock from '../config/mock';
 import {parseResult, packRequest} from '../utils/request';
+import authCode from '../config/authCode';
 
 // 登录
 export const login = (params) => {
+  let mock = false;
   if (mock) {
-    return Promise.resolve({});
+    return Promise.resolve({
+      auth: authCode.shopOwner
+    });
   }
   return new Promise((resolve) => {
     createWs().then(task => {
@@ -13,7 +17,7 @@ export const login = (params) => {
         task.send({data: packRequest(params, '2001')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })
@@ -44,7 +48,7 @@ export const queryUserInfo = (params) => {
   if (mock) {
     return Promise.resolve({
       // 1-管理员，2-店长，3-员工
-      auth: 3,
+      auth: authCode.shopOwner,
       shopId: 1
     });
   }
@@ -54,7 +58,7 @@ export const queryUserInfo = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result));
+        resolve(parseResult(result.data));
         task.close();
       })
     })
