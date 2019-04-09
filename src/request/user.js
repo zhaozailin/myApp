@@ -5,7 +5,6 @@ import authCode from '../config/authCode';
 
 // 登录
 export const login = (params) => {
-  let mock = false;
   if (mock) {
     return Promise.resolve({
       auth: authCode.shopOwner
@@ -26,7 +25,6 @@ export const login = (params) => {
 
 // 注册
 export const register = (params) => {
-  let mock = false;
   if (mock) {
     return Promise.resolve({});
   }

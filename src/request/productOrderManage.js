@@ -4,7 +4,6 @@ import {parseResult, packRequest} from '../utils/request';
 
 // 查询我的订单列表
 export const queryOrderList = (params) => {
-  let mock = false;
   if (mock) {
     return Promise.resolve([
       {
