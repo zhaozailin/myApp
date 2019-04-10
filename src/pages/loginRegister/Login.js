@@ -39,23 +39,6 @@ export default class Login extends Component {
   }
 
   toLogin = () => {
-    wx.login({
-      success: (result) => {
-        let code = result.code;
-        Taro.request({
-          data: {
-            code: code,
-          },
-          url: 'http://localhost:3003/code2Session',
-          success: (r) => {
-            console.log(r.data);
-          }
-        })
-      }
-    })
-  }
-
-  toLogin1 = () => {
     if (this.checkLogin()) {
       login({
         phone: this.state.username,
