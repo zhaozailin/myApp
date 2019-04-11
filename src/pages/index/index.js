@@ -18,7 +18,7 @@ export default class Index extends Component {
     // 判断用户是否已经授权
     Taro.getSetting().then((res) => {
       // 已授权
-      if (res.authSetting['scope.userInfo']) {
+      // if (res.authSetting['scope.userInfo']) {
 
         // 获取登录用户信息
 
@@ -31,7 +31,7 @@ export default class Index extends Component {
         Taro.redirectTo({
           url: '/pages/loginRegister/index'
         })
-      }
+      // }
     })
   }
 
