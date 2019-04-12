@@ -4,6 +4,7 @@ import {AtInput, AtButton, AtFloatLayout, AtInputNumber} from 'taro-ui'
 import {register} from '../../request/user'
 import './index.less'
 import {checkPhone} from "../../utils/validator";
+import {pay} from "../../utils/payUtils";
 
 export default class Register extends Component {
   state = {
@@ -100,8 +101,23 @@ export default class Register extends Component {
         password: this.state.phone.slice(-4)
       }).then(() => {
         this.setState({payShow: true})
+        wx.showToast({
+          title: '注册成功',
+          icon: 'success',
+          duration: 500
+        })
       })
     }
+  }
+
+  // 确认付款
+  toPay = () => {
+    let totalFee = this.state.amount;
+    // FIXME
+    totalFee = 1;
+    pay(totalFee, '店长注册', () => {
+      this.setState({payShow: false})
+    })
   }
 
   changeYearNum = (yearNum) => {
@@ -182,7 +198,7 @@ export default class Register extends Component {
             <View className='login-register-pay-amount-wrap'>
               ￥{this.state.amount}
             </View>
-            <AtButton type='primary'>确认付款</AtButton>
+            <AtButton type='primary' onClick={this.toPay}>确认付款</AtButton>
           </View>
         </AtFloatLayout>}
       </View>

@@ -39,40 +39,6 @@ export default class Login extends Component {
   }
 
   toLogin = () => {
-    wx.login({
-      success: (result) => {
-        let code = result.code;
-        Taro.request({
-          data: {
-            code: code,
-          },
-          url: 'http://127.0.0.1:3007/code2Session',
-          success: (r) => {
-            console.log(r.data);
-            let payModel = r.data;
-            wx.requestPayment({
-              'timeStamp': payModel.timestamp,
-              'nonceStr': payModel.nonceStr,
-              'package': payModel.package,
-              'signType': 'MD5',
-              'paySign': payModel.paySign,
-              'success': function (res) {
-                wx.showToast({
-                  title: '支付成功',
-                  icon: 'success',
-                  duration: 2000
-                })
-              },
-              'fail': function (res) {
-              }
-            })
-          }
-        })
-      }
-    })
-  }
-
-  toLogin1 = () => {
     if (this.checkLogin()) {
       login({
         phone: this.state.username,
