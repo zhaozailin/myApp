@@ -71,7 +71,7 @@ export default class MyShop extends Component {
           <AtListItem title='店长电话' extraText={this.state.detail.phone} />
           <AtListItem title='门店地址' note={this.state.detail.addr} />
         </AtList>
-        {this.state.detail.warn &&
+        {this.state.detail.shop_status === 1 &&
         <View className='ms-btn-warn'>
           <View>您的店于{this.state.detail.expiredate}即将过期，每次续费时间为一年，请点击续费。</View>
           <AtButton type='secondary' onClick={this.toPay}>续费</AtButton>

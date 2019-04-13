@@ -1,9 +1,9 @@
 import Taro, {Component} from '@tarojs/taro'
-import { View, Picker } from '@tarojs/components'
+import { View, Picker, Text } from '@tarojs/components'
 import {AtInput, AtButton} from 'taro-ui'
 import './index.less'
 import {checkPhone} from "../../utils/validator";
-import {createShop} from "../../request/shopProductManage";
+import {createShop, editShop} from "../../request/shopProductManage";
 
 export default class Create extends Component {
   state = {
@@ -97,17 +97,34 @@ export default class Create extends Component {
 
   toSave = () => {
     if (this.checkSave()) {
-      createShop({
-        name: this.state.name,
-        identity_cards: this.state.identity_cards,
-        shop_address: this.state.shop_address,
-        shop_name: this.state.shop_name,
-        phone: this.state.phone,
-        password: this.state.phone.slice(-4)
-      }).then(() => {
-        Taro.showToast({title: '新增成功', icon: 'none'})
-        this.props.back();
-      });
+      // 修改
+      if (this.state.id) {
+        editShop({
+          id: this.state.id,
+          name: this.state.name,
+          identity_cards: this.state.identity_cards,
+          shop_address: this.state.shop_address,
+          shop_name: this.state.shop_name,
+          expiredate: this.state.expiredate,
+        }).then(() => {
+          Taro.showToast({title: '修改成功', icon: 'none'})
+          this.props.back();
+        });
+      }
+      // 新增
+      else {
+        createShop({
+          name: this.state.name,
+          identity_cards: this.state.identity_cards,
+          shop_address: this.state.shop_address,
+          shop_name: this.state.shop_name,
+          phone: this.state.phone,
+          password: this.state.phone.slice(-4)
+        }).then(() => {
+          Taro.showToast({title: '新增成功', icon: 'none'})
+          this.props.back();
+        });
+      }
     }
   }
 
@@ -166,7 +183,8 @@ export default class Create extends Component {
         <View>
           <Picker mode='date' onChange={this.onDateChange}>
             <View className='picker slm-date'>
-              到期时间：{this.state.expiredate}
+              到期时间
+              <Text className='slm-text'>{this.state.expiredate}</Text>
             </View>
           </Picker>
         </View>
