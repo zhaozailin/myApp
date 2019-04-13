@@ -71,7 +71,26 @@ export const queryShopInfo = (params) => {
       phone: '15068140482',
       addr: '地址',
       expiredate: '2020-03-10',
+      warn: true,
     });
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result.data));
+        task.close();
+      })
+    })
+  })
+}
+
+// 续费
+export const renewSuccess = () => {
+  if (mock) {
+    return Promise.resolve({});
   }
   return new Promise((resolve) => {
     createWs().then(task => {

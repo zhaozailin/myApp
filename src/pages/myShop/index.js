@@ -1,7 +1,7 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import {AtList, AtButton, AtListItem} from 'taro-ui'
-import {queryShopInfo} from '../../request/user'
+import {queryShopInfo, renewSuccess} from '../../request/user'
 import {pay} from '../../utils/payUtils'
 import './index.less'
 
@@ -55,7 +55,11 @@ export default class MyShop extends Component {
   }
 
   toPay = () => {
-    pay(1, '门店续费', () => {
+    let fee = 1;
+    pay(fee, '门店续费', () => {
+      renewSuccess(fee).then(() => {
+        Taro.showToast({title: '续费成功', icon: 'none'});
+      });
     })
   }
 
@@ -67,7 +71,12 @@ export default class MyShop extends Component {
           <AtListItem title='店长电话' extraText={this.state.detail.phone} />
           <AtListItem title='门店地址' note={this.state.detail.addr} />
         </AtList>
-        <View className='ms-btn-warn'>您的店于{this.state.detail.expiredate}即将过期，每次续费时间为一年，请点击<a onClick={this.toPay}>续费</a></View>
+        {this.state.detail.warn &&
+        <View className='ms-btn-warn'>
+          <View>您的店于{this.state.detail.expiredate}即将过期，每次续费时间为一年，请点击续费。</View>
+          <AtButton type='secondary' onClick={this.toPay}>续费</AtButton>
+        </View>
+        }
         <View className='ms-btn-wrap'>
           <View className='ms-btn-share'>
             <Button type='primary' openType='share'>分享链接 邀请好友</Button>
