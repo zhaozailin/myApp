@@ -1,10 +1,12 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import {AtList, AtButton, AtListItem} from 'taro-ui'
+import {queryShopInfo} from '../../request/user'
 import './index.less'
 
 export default class MyShop extends Component {
   state = {
+    detail: {}
   }
 
   config = {
@@ -12,7 +14,13 @@ export default class MyShop extends Component {
   }
 
   componentDidMount() {
-    console.log('pppppppp')
+    queryShopInfo({
+      shopId: Taro.getStorageSync('shopId')
+    }).then((detail) => {
+      this.setState({
+        detail
+      })
+    })
   }
 
   shareWeCode = () => {
@@ -49,9 +57,9 @@ export default class MyShop extends Component {
     return (
       <View className='ms-wrap'>
         <AtList>
-          <AtListItem title='店长姓名' extraText='孙阳' />
-          <AtListItem title='店长电话' extraText='1506981838' />
-          <AtListItem title='门店地址' note='浙江省杭州市萧山区闻堰镇湘湖人家1号店爱婴岛' />
+          <AtListItem title='店长姓名' extraText={this.state.detail.name} />
+          <AtListItem title='店长电话' extraText={this.state.detail.phone} />
+          <AtListItem title='门店地址' note={this.state.detail.addr} />
         </AtList>
         <View className='ms-btn-wrap'>
           <View className='ms-btn-share'>

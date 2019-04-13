@@ -63,4 +63,26 @@ export const queryUserInfo = (params) => {
   })
 }
 
+// 获取门店信息
+export const queryShopInfo = (params) => {
+  if (mock) {
+    return Promise.resolve({
+      name: '店长1',
+      phone: '15068140482',
+      addr: '地址',
+    });
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result.data));
+        task.close();
+      })
+    })
+  })
+}
+
 
