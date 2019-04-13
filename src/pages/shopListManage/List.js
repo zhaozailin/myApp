@@ -8,7 +8,8 @@ import './index.less'
 export default class List extends Component {
   state = {
     searchkey: '',
-    list: []
+    list: [],
+    oriList: [],
   }
 
   config = {
@@ -20,14 +21,30 @@ export default class List extends Component {
       uId: Taro.getStorageSync('uId')
     }).then((list) => {
       this.setState({
-        list
+        list,
+        oriList: list
       })
     })
   }
 
   search = () => {
     let key = this.state.searchkey;
-    console.log(key);
+    if (key.trim()) {
+      let newList = [];
+      this.state.oriList.forEach((ele) => {
+        if (ele.name.indexOf(key) !== -1) {
+          newList.push(ele);
+        }
+      })
+      this.setState({
+        list: [...newList]
+      })
+    }
+    else {
+      this.setState({
+        list: [...this.state.oriList]
+      })
+    }
   }
 
   changeSearchInput = (searchkey) => {

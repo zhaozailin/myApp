@@ -7,7 +7,7 @@ import authCode from '../config/authCode';
 export const login = (params) => {
   if (mock) {
     return Promise.resolve({
-      auth: authCode.shopOwner
+      auth: authCode.manager
     });
   }
   return new Promise((resolve) => {
