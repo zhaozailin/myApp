@@ -55,7 +55,7 @@ export default class MyShop extends Component {
   }
 
   toPay = () => {
-    pay(99800, '门店续费', () => {
+    pay(1, '门店续费', () => {
     })
   }
 
