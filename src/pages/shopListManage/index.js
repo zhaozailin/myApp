@@ -6,7 +6,8 @@ import './index.less'
 
 export default class ShopListManage extends Component {
   state = {
-    showList: true
+    showList: true,
+    shop: {}
   }
 
   config = {
@@ -16,10 +17,13 @@ export default class ShopListManage extends Component {
   render() {
     return (
       <View className='mol-wrap'>
-        {this.state.showList && <List showCreate={() => {
+        {this.state.showList && <List showCreate={(shop) => {
           this.setState({showList: false})
+          this.setState({
+            shop: shop || {}
+          })
         }}/>}
-        {!this.state.showList && <Create back={() => {
+        {!this.state.showList && <Create shop={this.state.shop} back={() => {
           this.setState({showList: true})
         }}/>}
       </View>

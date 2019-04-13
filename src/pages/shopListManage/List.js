@@ -62,6 +62,10 @@ export default class List extends Component {
     })
   }
 
+  toEdit = (ele) => {
+    this.props.showCreate(ele)
+  }
+
   changeState = (ele) => {
     changeState({
       shopId: ele.id,
@@ -88,7 +92,7 @@ export default class List extends Component {
         {
           this.state.list.map(ele => {
             return (
-              <View key={ele.id} className='mol-ele'>
+              <View key={ele.id} className='mol-ele' onClick={this.toEdit.bind(this, ele)}>
                 <AtCard
                   title={ele.name}
                 >

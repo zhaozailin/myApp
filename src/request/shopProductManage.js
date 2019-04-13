@@ -14,6 +14,8 @@ export const queryShopList = (params) => {
         phone: '15068139393',
         expiredate: '2019-05-01',
         active: 0,
+        shopowner_name: '店长',
+        shopowner_identity_cards: '1309211988888888',
       },
       {
         id: 2,
@@ -22,6 +24,8 @@ export const queryShopList = (params) => {
         phone: '15068139393',
         expiredate: '2019-05-01',
         active: 1,
+        shopowner_name: '店长',
+        shopowner_identity_cards: '1309211988888888',
       },
       {
         id: 3,
@@ -30,6 +34,8 @@ export const queryShopList = (params) => {
         phone: '15068139393',
         expiredate: '2019-05-01',
         active: 1,
+        shopowner_name: '店长',
+        shopowner_identity_cards: '1309211988888888',
       },
       {
         id: 4,
@@ -38,6 +44,8 @@ export const queryShopList = (params) => {
         phone: '15068139393',
         expiredate: '2019-05-01',
         active: 0,
+        shopowner_name: '店长',
+        shopowner_identity_cards: '1309211988888888',
       },
       {
         id: 5,
@@ -46,6 +54,8 @@ export const queryShopList = (params) => {
         phone: '15068139393',
         expiredate: '2019-05-01',
         active: 1,
+        shopowner_name: '店长',
+        shopowner_identity_cards: '1309211988888888',
       },
     ]);
   }
