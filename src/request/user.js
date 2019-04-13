@@ -31,7 +31,7 @@ export const register = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2019')})
+        task.send({data: packRequest(params, '2030')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
