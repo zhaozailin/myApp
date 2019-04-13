@@ -15,7 +15,6 @@ class App extends Component {
       'pages/index/index',
       'pages/main/index',
       'pages/loginRegister/index',
-      'pages/shopProductManage/index',
     ],
     window: {
       backgroundTextStyle: 'light',
