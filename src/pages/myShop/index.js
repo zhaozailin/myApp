@@ -2,6 +2,7 @@ import Taro, {Component} from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import {AtList, AtButton, AtListItem} from 'taro-ui'
 import {queryShopInfo} from '../../request/user'
+import {pay} from '../../utils/payUtils'
 import './index.less'
 
 export default class MyShop extends Component {
@@ -53,6 +54,11 @@ export default class MyShop extends Component {
     }
   }
 
+  toPay = () => {
+    pay(99800, '门店续费', () => {
+    })
+  }
+
   render() {
     return (
       <View className='ms-wrap'>
@@ -61,6 +67,7 @@ export default class MyShop extends Component {
           <AtListItem title='店长电话' extraText={this.state.detail.phone} />
           <AtListItem title='门店地址' note={this.state.detail.addr} />
         </AtList>
+        <View className='ms-btn-warn'>您的店于{this.state.detail.expiredate}即将过期，每次续费时间为一年，请点击<a onClick={this.toPay}>续费</a></View>
         <View className='ms-btn-wrap'>
           <View className='ms-btn-share'>
             <Button type='primary' openType='share'>分享链接 邀请好友</Button>

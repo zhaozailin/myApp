@@ -70,6 +70,7 @@ export const queryShopInfo = (params) => {
       name: '店长1',
       phone: '15068140482',
       addr: '地址',
+      expiredate: '2020-03-10',
     });
   }
   return new Promise((resolve) => {
