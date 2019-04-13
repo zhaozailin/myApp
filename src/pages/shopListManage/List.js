@@ -2,7 +2,7 @@ import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
-import {queryShopList} from '../../request/shopProductManage'
+import {queryShopList, changeState} from '../../request/shopProductManage'
 import './index.less'
 
 export default class List extends Component {
@@ -17,6 +17,10 @@ export default class List extends Component {
   }
 
   componentDidMount() {
+    this.queryList();
+  }
+
+  queryList = () => {
     queryShopList({
       uId: Taro.getStorageSync('uId')
     }).then((list) => {
@@ -53,6 +57,13 @@ export default class List extends Component {
     })
   }
 
+  changeState = (ele) => {
+    changeState(ele.id, ele.status).then(() => {
+      Taro.showToast({title: '操作成功', icon: 'none'})
+      this.queryList();
+    })
+  }
+
   render() {
     return (
       <View>
@@ -82,7 +93,7 @@ export default class List extends Component {
                       <View>门店编号：{ele.id}</View>
                     </View>
                     <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small'>{ele.status ? '禁用' : '启用'}</AtButton>
+                      <AtButton type='primary' size='small' onClick={this.changeState.bind(this, ele)}>{ele.status ? '禁用' : '启用'}</AtButton>
                     </View>
                   </View>
                 </AtCard>

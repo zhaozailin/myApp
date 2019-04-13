@@ -2,13 +2,14 @@ import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
-import {queryShopCheckList} from '../../request/shopProductManage'
+import {queryShopCheckList, confirmCheck} from '../../request/shopProductManage'
 import './index.less'
 
 export default class ShopCheckList extends Component {
   state = {
     searchkey: '',
-    list: []
+    list: [],
+    oriList: [],
   }
 
   config = {
@@ -16,23 +17,50 @@ export default class ShopCheckList extends Component {
   }
 
   componentDidMount() {
+    this.queryList();
+  }
+
+  queryList = () => {
     queryShopCheckList({
       uId: Taro.getStorageSync('uId')
     }).then((list) => {
       this.setState({
-        list
+        list,
+        oriList: list
       })
     })
   }
 
   search = () => {
     let key = this.state.searchkey;
-    console.log(key);
+    if (key.trim()) {
+      let newList = [];
+      this.state.oriList.forEach((ele) => {
+        if (ele.name.indexOf(key) !== -1) {
+          newList.push(ele);
+        }
+      })
+      this.setState({
+        list: [...newList]
+      })
+    }
+    else {
+      this.setState({
+        list: [...this.state.oriList]
+      })
+    }
   }
 
   changeSearchInput = (searchkey) => {
     this.setState({
       searchkey
+    })
+  }
+
+  confirm = (id) => {
+    confirmCheck({id: id}).then(() => {
+      Taro.showToast({title: '审核通过', icon: 'none'})
+      this.queryList();
     })
   }
 
@@ -60,7 +88,7 @@ export default class ShopCheckList extends Component {
                       <View>门店编号：{ele.id}</View>
                     </View>
                     <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small'>通过</AtButton>
+                      <AtButton type='primary' size='small' onClick={this.confirm.bind(this, ele.id)}>通过</AtButton>
                     </View>
                   </View>
                 </AtCard>

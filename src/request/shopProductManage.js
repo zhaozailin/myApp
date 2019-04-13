@@ -66,6 +66,24 @@ export const queryShopList = (params) => {
   })
 }
 
+// 改变门店状态
+export const changeState = (params) => {
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result.data));
+        task.close();
+      })
+    })
+  })
+}
+
 // 查询门店审核列表
 export const queryShopCheckList = (params) => {
   if (mock) {
@@ -116,6 +134,24 @@ export const queryShopCheckList = (params) => {
         status: 1,
       },
     ]);
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result.data));
+        task.close();
+      })
+    })
+  })
+}
+
+// 确认审核通过
+export const confirmCheck = (params) => {
+  if (mock) {
+    return Promise.resolve({});
   }
   return new Promise((resolve) => {
     createWs().then(task => {
