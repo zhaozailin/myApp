@@ -23,7 +23,7 @@ export default class List extends Component {
 
   queryList = () => {
     queryProducList({
-      uId: Taro.getStorageSync('uId')
+      shopId: Taro.getStorageSync('shopId')
     }).then((list) => {
       this.setState({
         list,
@@ -62,7 +62,9 @@ export default class List extends Component {
     e.stopPropagation()
     changeProductState({
       id: ele.id,
-      active_status: ele.active_status
+      price: ele.price,
+      count: ele.count,
+      active_status: ele.active_status ? 0 : 1
     }).then(() => {
       Taro.showToast({title: '操作成功', icon: 'none'});
       this.queryList()
@@ -94,7 +96,7 @@ export default class List extends Component {
                     <View className='at-col at-col-6'>
                       <Image
                         className='plm-img'
-                        src=''
+                        src={ele.url}
                         mode='widthFix' />
                     </View>
                     <View className='at-col at-col-3'>

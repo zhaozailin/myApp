@@ -8,7 +8,7 @@ export default class Edit extends Component {
   state = {
     price: '',
     count: '',
-    active_status: true,
+    active_status: false,
   }
 
   componentDidMount = () => {
@@ -16,6 +16,7 @@ export default class Edit extends Component {
     this.setState({
       price: detail.price || '',
       count: detail.count || '',
+      active_status: !!detail.active_status,
     })
   }
 
@@ -52,7 +53,14 @@ export default class Edit extends Component {
   toAdd = () => {
     if (this.checkValid()) {
       addProduct({
-
+        shopId: Taro.getStorageSync('shopId'),
+        price: parseInt(this.state.price),
+        count: parseInt(this.state.count),
+        active_status: this.state.active_status ? 1 : 0,
+        url: this.props.product.url,
+        name: this.props.product.name,
+      }).then(() => {
+        this.props.back();
       })
     }
   }
@@ -60,7 +68,14 @@ export default class Edit extends Component {
   toEdit = () => {
     if (this.checkValid()) {
       editProduct({
-
+        id: this.props.product.id,
+        price: parseInt(this.state.price),
+        count: parseInt(this.state.count),
+        active_status: this.state.active_status ? 1 : 0,
+        url: this.props.product.url,
+        name: this.props.product.name,
+      }).then(() => {
+        this.props.back();
       })
     }
   }
@@ -71,14 +86,14 @@ export default class Edit extends Component {
         <View>
           <Image
             className='plm-edit-img'
-            src=''
+            src={this.props.product.url}
             mode='widthFix' />
         </View>
         <AtInput
           title='名称'
           type='text'
           editable={false}
-          value={'洗澡'}
+          value={this.props.product.name}
         />
         <AtInput
           clear

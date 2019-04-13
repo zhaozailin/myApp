@@ -289,7 +289,7 @@ export const queryProducList = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2012')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
@@ -307,7 +307,7 @@ export const changeProductState = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2011')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
@@ -325,7 +325,7 @@ export const addProduct = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2010')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
@@ -343,7 +343,7 @@ export const editProduct = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2011')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
