@@ -220,6 +220,24 @@ export const queryEmployeList = (params) => {
   })
 }
 
+// 改变员工状态
+export const changeEmployeState = (params) => {
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result.data));
+        task.close();
+      })
+    })
+  })
+}
+
 // 查询产品列表
 export const queryProducList = (params) => {
   if (mock) {

@@ -58,7 +58,10 @@ export default class List extends Component {
   }
 
   changeState = (ele) => {
-    changeState(ele.id, ele.status).then(() => {
+    changeState({
+      id: ele.id,
+      status: ele.status
+    }).then(() => {
       Taro.showToast({title: '操作成功', icon: 'none'})
       this.queryList();
     })

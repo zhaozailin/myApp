@@ -2,14 +2,15 @@ import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
-import {queryEmployeList} from '../../request/shopProductManage'
+import {queryEmployeList, changeEmployeState} from '../../request/shopProductManage'
 import './index.less'
 import authCode from '../../config/authCode'
 
 export default class List extends Component {
   state = {
     searchkey: '',
-    list: []
+    list: [],
+    oriList: [],
   }
 
   config = {
@@ -17,23 +18,53 @@ export default class List extends Component {
   }
 
   componentDidMount() {
+    this.queryList();
+  }
+
+  queryList = () => {
     queryEmployeList({
       uId: Taro.getStorageSync('uId')
     }).then((list) => {
       this.setState({
-        list
+        list,
+        oriList: list
       })
     })
   }
 
   search = () => {
     let key = this.state.searchkey;
-    console.log(key);
+    if (key.trim()) {
+      let newList = [];
+      this.state.oriList.forEach((ele) => {
+        if (ele.name.indexOf(key) !== -1) {
+          newList.push(ele);
+        }
+      })
+      this.setState({
+        list: [...newList]
+      })
+    }
+    else {
+      this.setState({
+        list: [...this.state.oriList]
+      })
+    }
   }
 
   changeSearchInput = (searchkey) => {
     this.setState({
       searchkey
+    })
+  }
+
+  changeStatus = (ele) => {
+    changeEmployeState({
+      id: ele.id,
+      active_status: ele.active_status
+    }).then(() => {
+      Taro.showToast({title: '操作成功', icon: 'none'})
+      this.queryList()
     })
   }
 
@@ -68,7 +99,7 @@ export default class List extends Component {
                     {
                       Taro.getStorageSync('auth') !== authCode.employe &&
                       <View className='at-col at-col-2'>
-                        <AtButton type='primary' size='small'>{ele.active_status ? '禁用' : '启用'}</AtButton>
+                        <AtButton type='primary' size='small' onClick={this.changeStatus.bind(this, ele)}>{ele.active_status ? '禁用' : '启用'}</AtButton>
                       </View>
                     }
                   </View>

@@ -1,15 +1,16 @@
 import Taro, {Component} from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Button } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
-import {queryProducList} from '../../request/shopProductManage'
+import {queryProducList, queryShopCheckList} from '../../request/shopProductManage'
 import './index.less'
 import authCode from "../../config/authCode";
 
 export default class List extends Component {
   state = {
     searchkey: '',
-    list: []
+    list: [],
+    oriList: [],
   }
 
   config = {
@@ -17,18 +18,38 @@ export default class List extends Component {
   }
 
   componentDidMount() {
+    this.queryList()
+  }
+
+  queryList = () => {
     queryProducList({
       uId: Taro.getStorageSync('uId')
     }).then((list) => {
       this.setState({
-        list
+        list,
+        oriList: list
       })
     })
   }
 
   search = () => {
     let key = this.state.searchkey;
-    console.log(key);
+    if (key.trim()) {
+      let newList = [];
+      this.state.oriList.forEach((ele) => {
+        if (ele.name.indexOf(key) !== -1) {
+          newList.push(ele);
+        }
+      })
+      this.setState({
+        list: [...newList]
+      })
+    }
+    else {
+      this.setState({
+        list: [...this.state.oriList]
+      })
+    }
   }
 
   changeSearchInput = (searchkey) => {
@@ -37,8 +58,9 @@ export default class List extends Component {
     })
   }
 
-  upOrDown = (status, e) => {
+  upOrDown = (ele, e) => {
     e.stopPropagation()
+    console.log(ele)
   }
 
   toEdit = (ele) => {
@@ -63,7 +85,7 @@ export default class List extends Component {
                   title={ele.name}
                 >
                   <View className='at-row'>
-                    <View className='at-col at-col-7'>
+                    <View className='at-col at-col-6'>
                       <Image
                         className='plm-img'
                         src=''
@@ -75,8 +97,8 @@ export default class List extends Component {
                     </View>
                     {
                       Taro.getStorageSync('auth') === authCode.shopOwner &&
-                      <View className='at-col at-col-2'>
-                        <AtButton type='primary' size='small' onClick={this.upOrDown.bind(this, ele.active_status)}>{ele.active_status ? '下架' : '上架'}</AtButton>
+                      <View className='at-col at-col-3'>
+                        <Button type='primary' size='mini' onClick={this.upOrDown.bind(this, ele)}>{ele.active_status ? '下架' : '上架'}</Button>
                       </View>
                     }
                   </View>

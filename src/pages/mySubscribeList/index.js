@@ -58,7 +58,10 @@ export default class MySubscribeList extends Component {
   }
 
   confirm = (id) => {
-    confirmSubscribe({id: id}).then(() => {
+    confirmSubscribe({
+      id: id,
+      uId: Taro.getStorageSync('uId')
+    }).then(() => {
       Taro.showToast({title: '确认成功', icon: 'none'})
       this.queryList();
     })
