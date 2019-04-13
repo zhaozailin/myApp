@@ -88,7 +88,7 @@ export const queryShopInfo = (params) => {
 }
 
 // 续费
-export const renewSuccess = () => {
+export const renewSuccess = (params) => {
   if (mock) {
     return Promise.resolve({});
   }

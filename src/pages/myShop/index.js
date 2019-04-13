@@ -64,6 +64,13 @@ export default class MyShop extends Component {
       shopId: Taro.getStorageSync('shopId')
     }).then(() => {
       Taro.showToast({title: '续费成功', icon: 'none'});
+      queryShopInfo({
+        shopId: Taro.getStorageSync('shopId')
+      }).then((detail) => {
+        this.setState({
+          detail
+        })
+      })
     });
   }
 
