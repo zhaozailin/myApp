@@ -16,7 +16,7 @@ export const login = (params) => {
         task.send({data: packRequest(params, '2001')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -34,7 +34,7 @@ export const register = (params) => {
         task.send({data: packRequest(params, '2019')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -56,7 +56,7 @@ export const queryUserInfo = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -80,7 +80,7 @@ export const queryShopInfo = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -98,7 +98,7 @@ export const renewSuccess = () => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })

@@ -1,7 +1,7 @@
 import {createWs} from '../ws/index';
 import mock from '../config/mock';
 import {parseResult, packRequest} from '../utils/request';
-
+import Taro from '@tarojs/taro'
 // 查询我的订单列表
 export const queryOrderList = (params) => {
   if (mock) {
@@ -54,7 +54,7 @@ export const queryOrderList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -72,7 +72,7 @@ export const confirmOrder = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -132,7 +132,7 @@ export const querySubscribeList = (params) => {
         task.send({data: packRequest(params, '2024')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -150,7 +150,7 @@ export const confirmSubscribe = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -214,7 +214,7 @@ export const queryChargeRecordList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -283,7 +283,7 @@ export const queryConsumeRecordList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })

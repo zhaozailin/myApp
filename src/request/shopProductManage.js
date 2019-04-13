@@ -59,7 +59,7 @@ export const queryShopList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -77,7 +77,7 @@ export const changeState = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -141,7 +141,7 @@ export const queryShopCheckList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -159,7 +159,7 @@ export const confirmCheck = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -213,7 +213,7 @@ export const queryEmployeList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -231,7 +231,7 @@ export const changeEmployeState = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -290,7 +290,7 @@ export const queryProducList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
@@ -308,7 +308,7 @@ export const changeProductState = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })

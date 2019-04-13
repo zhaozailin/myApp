@@ -44,7 +44,7 @@ export const queryClientList = (params) => {
         task.send({data: packRequest(params, '2021')})
       });
       task.onMessage(result => {
-        resolve(parseResult(result.data));
+        parseResult(resolve, result.data);
         task.close();
       })
     })
