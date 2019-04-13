@@ -1,7 +1,7 @@
 import {createWs} from '../ws/index';
 import mock from '../config/mock';
 import {parseResult, packRequest} from '../utils/request';
-import Taro from '@tarojs/taro'
+
 // 查询我的订单列表
 export const queryOrderList = (params) => {
   if (mock) {

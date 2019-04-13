@@ -138,7 +138,7 @@ export const queryShopCheckList = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2015')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);

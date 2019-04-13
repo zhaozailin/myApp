@@ -62,20 +62,20 @@ export default class ProductOrderManage extends Component {
       <View className='pom-wrap'>
         <AtTabs fixed swipeable={false} current={this.state.current} tabList={this.state.tabList} onClick={this.handleClick}>
           <AtTabsPane current={this.state.current} index={0} >
-            {Taro.getStorageSync('auth') === authCode.manager &&  <ChargeRecordList/>}
-            {Taro.getStorageSync('auth') === authCode.shopOwner &&  <MyOrderList/>}
-            {Taro.getStorageSync('auth') === authCode.employe &&  <MySubscribeList/>}
+            {(this.state.current === 0 && Taro.getStorageSync('auth') === authCode.manager) &&  <ChargeRecordList/>}
+            {(this.state.current === 0 && Taro.getStorageSync('auth') === authCode.shopOwner) &&  <MyOrderList/>}
+            {(this.state.current === 0 && Taro.getStorageSync('auth') === authCode.employe) &&  <MySubscribeList/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
-            {Taro.getStorageSync('auth') === authCode.manager &&  <ConsumeRecordList/>}
-            {Taro.getStorageSync('auth') === authCode.shopOwner &&  <MySubscribeList/>}
-            {Taro.getStorageSync('auth') === authCode.employe &&  <ConsumeRecordList/>}
+            {(this.state.current === 1 && Taro.getStorageSync('auth') === authCode.manager) &&  <ConsumeRecordList/>}
+            {(this.state.current === 1 && Taro.getStorageSync('auth') === authCode.shopOwner) &&  <MySubscribeList/>}
+            {(this.state.current === 1 && Taro.getStorageSync('auth') === authCode.employe) &&  <ConsumeRecordList/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
-            {Taro.getStorageSync('auth') === authCode.shopOwner &&  <ChargeRecordList/>}
+            {(this.state.current === 2 && Taro.getStorageSync('auth') === authCode.shopOwner) &&  <ChargeRecordList/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={3}>
-            {Taro.getStorageSync('auth') === authCode.shopOwner &&  <ConsumeRecordList/>}
+            {(this.state.current === 3 && Taro.getStorageSync('auth') === authCode.shopOwner) &&  <ConsumeRecordList/>}
           </AtTabsPane>
         </AtTabs>
       </View>
