@@ -21,12 +21,17 @@ export default class ShopCheckList extends Component {
   }
 
   queryList = () => {
-    queryShopCheckList({
-      uId: Taro.getStorageSync('uId')
-    }).then((list) => {
-      this.setState({
-        list,
-        oriList: list
+    this.setState({
+      list: [],
+      oriList: []
+    }, () => {
+      queryShopCheckList({
+        uId: Taro.getStorageSync('uId')
+      }).then((list) => {
+        this.setState({
+          list,
+          oriList: list
+        })
       })
     })
   }
@@ -58,7 +63,7 @@ export default class ShopCheckList extends Component {
   }
 
   confirm = (id) => {
-    confirmCheck({id: id}).then(() => {
+    confirmCheck({shopId: id}).then(() => {
       Taro.showToast({title: '审核通过', icon: 'none'})
       this.queryList();
     })
