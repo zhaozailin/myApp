@@ -64,19 +64,19 @@ export default class ShopProductManage extends Component {
         <AtTabs fixed swipeable={false} current={this.state.current} tabList={this.state.tabList}
                 onClick={this.handleClick}>
           <AtTabsPane current={this.state.current} index={0}>
-            {Taro.getStorageSync('auth') === authCode.manager && <ShopListManage/>}
-            {Taro.getStorageSync('auth') === authCode.shopOwner && <EmployeListManage/>}
-            {Taro.getStorageSync('auth') === authCode.employe && <EmployeListManage/>}
+            {(this.state.current === 0 && Taro.getStorageSync('auth') === authCode.manager) && <ShopListManage/>}
+            {(this.state.current === 0 && Taro.getStorageSync('auth') === authCode.shopOwner) && <EmployeListManage/>}
+            {(this.state.current === 0 && Taro.getStorageSync('auth') === authCode.employe) && <EmployeListManage/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
-            {Taro.getStorageSync('auth') === authCode.manager && <ShopCheckList/>}
-            {Taro.getStorageSync('auth') === authCode.shopOwner && <ProductListManage/>}
+            {(this.state.current === 1 && Taro.getStorageSync('auth') === authCode.manager) && <ShopCheckList/>}
+            {(this.state.current === 1 && Taro.getStorageSync('auth') === authCode.shopOwner) && <ProductListManage/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
-            {Taro.getStorageSync('auth') === authCode.manager && <EmployeListManage/>}
+            {(this.state.current === 2 && Taro.getStorageSync('auth') === authCode.manager) && <EmployeListManage/>}
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={3}>
-            {Taro.getStorageSync('auth') === authCode.manager && <ProductListManage/>}
+            {(this.state.current === 3 && Taro.getStorageSync('auth') === authCode.manager) && <ProductListManage/>}
           </AtTabsPane>
         </AtTabs>
       </View>

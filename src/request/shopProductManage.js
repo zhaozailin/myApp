@@ -4,6 +4,7 @@ import {parseResult, packRequest} from '../utils/request';
 
 // 查询门店列表
 export const queryShopList = (params) => {
+  params.check = 0;
   if (mock) {
     return Promise.resolve([
       {
@@ -56,7 +57,7 @@ export const queryShopList = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2015')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
@@ -86,6 +87,7 @@ export const changeState = (params) => {
 
 // 查询门店审核列表
 export const queryShopCheckList = (params) => {
+  params.check = 1;
   if (mock) {
     return Promise.resolve([
       {
