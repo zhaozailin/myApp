@@ -88,7 +88,6 @@ export default class ShopCheckList extends Component {
                     <View className='at-col at-col-10'>
                       <View>电话：{ele.phone}</View>
                       <View>门店地址：{ele.addr}</View>
-                      <View>老板账号：{ele.account}</View>
                       <View>过期日期：{ele.expiredate}</View>
                       <View>门店编号：{ele.id}</View>
                     </View>

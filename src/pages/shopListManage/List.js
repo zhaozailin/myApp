@@ -21,12 +21,17 @@ export default class List extends Component {
   }
 
   queryList = () => {
-    queryShopList({
-      uId: Taro.getStorageSync('uId')
-    }).then((list) => {
-      this.setState({
-        list,
-        oriList: list
+    this.setState({
+      list: [],
+      oriList: [],
+    }, () => {
+      queryShopList({
+        uId: Taro.getStorageSync('uId')
+      }).then((list) => {
+        this.setState({
+          list,
+          oriList: list
+        })
       })
     })
   }
@@ -59,8 +64,8 @@ export default class List extends Component {
 
   changeState = (ele) => {
     changeState({
-      id: ele.id,
-      status: ele.status
+      shopId: ele.id,
+      active: ele.active ? 0 : 1
     }).then(() => {
       Taro.showToast({title: '操作成功', icon: 'none'})
       this.queryList();
@@ -91,12 +96,11 @@ export default class List extends Component {
                     <View className='at-col at-col-10'>
                       <View>电话：{ele.phone}</View>
                       <View>门店地址：{ele.addr}</View>
-                      <View>老板账号：{ele.account}</View>
                       <View>过期日期：{ele.expiredate}</View>
                       <View>门店编号：{ele.id}</View>
                     </View>
                     <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small' onClick={this.changeState.bind(this, ele)}>{ele.status ? '禁用' : '启用'}</AtButton>
+                      <AtButton type='primary' size='small' onClick={this.changeState.bind(this, ele)}>{ele.active ? '禁用' : '启用'}</AtButton>
                     </View>
                   </View>
                 </AtCard>
