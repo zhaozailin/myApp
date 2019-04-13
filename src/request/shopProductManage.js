@@ -342,3 +342,21 @@ export const editProduct = (params) => {
     })
   })
 }
+
+// 新增门店
+export const createShop = (params) => {
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2013')})
+      });
+      task.onMessage(result => {
+        parseResult(resolve, result.data);
+        task.close();
+      })
+    })
+  })
+}
