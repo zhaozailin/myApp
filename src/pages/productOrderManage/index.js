@@ -15,6 +15,7 @@ export default class ProductOrderManage extends Component {
   }
 
   componentDidMount = () => {
+    console.log('componentDidMount')
     // 管理员
     if (Taro.getStorageSync('auth') === authCode.manager) {
       this.setState({

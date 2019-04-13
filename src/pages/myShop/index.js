@@ -12,6 +12,7 @@ export default class MyShop extends Component {
   }
 
   componentDidMount() {
+    console.log('pppppppp')
   }
 
   shareWeCode = () => {
