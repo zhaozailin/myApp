@@ -1,5 +1,5 @@
-import {Component} from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import Taro, {Component} from '@tarojs/taro'
+import { View, Button } from '@tarojs/components'
 import {AtList, AtButton, AtListItem} from 'taro-ui'
 import './index.less'
 
@@ -14,6 +14,36 @@ export default class MyShop extends Component {
   componentDidMount() {
   }
 
+  shareWeCode = () => {
+    // Taro.request({
+    //   data: {
+    //     phone: '15068140482',
+    //   },
+    //   url: 'http://localhost:8000/getwxacode',
+    //   success: (r) => {
+    //     // let payModel = r.data;
+    //   }
+    // })
+    this.onShareAppMessage();
+  }
+
+  onShareAppMessage1 = () => {
+    return {
+      title: '标题',
+      path: '/pages/loginRegister/index?phone=' + '15068140482',
+      imageUrl: 'http://src.onlinedown.net/images/xcs/4/fbbf04b527486a623eaa33fc8304bbca396afb34-a0dcd7fbbcba9dad42759929b02fdbd52bd03aeb.png',
+      success(r) {
+        console.log(r);
+        wx.showShareMenu({
+          withShareTicket: true
+        })
+      },
+      fail(r) {
+        console.log(r);
+      }
+    }
+  }
+
   render() {
     return (
       <View className='ms-wrap'>
@@ -24,9 +54,9 @@ export default class MyShop extends Component {
         </AtList>
         <View className='ms-btn-wrap'>
           <View className='ms-btn-share'>
-            <AtButton className='ms-btn-share' type='primary'>分享链接 邀请好友</AtButton>
+            <Button type='primary' openType='share'>分享链接 邀请好友</Button>
           </View>
-          <AtButton type='secondary'>生成门店二维码</AtButton>
+          <AtButton type='secondary' onClick={this.shareWeCode}>生成门店二维码</AtButton>
         </View>
       </View>
     )

@@ -2,7 +2,7 @@ import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtButton, AtSearchBar} from 'taro-ui'
-import {queryOrderList} from '../../request/productOrderManage'
+import {queryOrderList, confirmOrder} from '../../request/productOrderManage'
 import './index.less'
 
 export default class MyOrderList extends Component {
@@ -17,6 +17,10 @@ export default class MyOrderList extends Component {
   }
 
   componentDidMount() {
+    this.queryList();
+  }
+
+  queryList = () => {
     queryOrderList({
       shopId: Taro.getStorageSync('shopId')
     }).then((list) => {
@@ -48,6 +52,14 @@ export default class MyOrderList extends Component {
     })
   }
 
+  confirmOrder = (id) => {
+    console.log(id);
+    confirmOrder({id: id}).then(() => {
+      Taro.showToast({title: '确认成功', icon: 'none'})
+      this.queryList();
+    })
+  }
+
   render() {
     return (
       <View className='mol-wrap'>
@@ -70,7 +82,7 @@ export default class MyOrderList extends Component {
                       <View>应缴费用：{ele.amount}</View>
                     </View>
                     <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small'>确认</AtButton>
+                      <AtButton type='primary' size='small' onClick={this.confirmOrder.bind(this, ele.id)}>确认</AtButton>
                     </View>
                   </View>
                 </AtCard>

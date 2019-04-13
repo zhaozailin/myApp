@@ -61,8 +61,27 @@ export const queryOrderList = (params) => {
   })
 }
 
+// 确认订单
+export const confirmOrder = (params) => {
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result.data));
+        task.close();
+      })
+    })
+  })
+}
+
 // 查询我的预定列表
 export const querySubscribeList = (params) => {
+  // let mock = false;
   if (mock) {
     return Promise.resolve([
       {
@@ -110,7 +129,7 @@ export const querySubscribeList = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2024')})
       });
       task.onMessage(result => {
         resolve(parseResult(result.data));
