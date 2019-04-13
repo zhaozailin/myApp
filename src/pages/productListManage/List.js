@@ -1,8 +1,8 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View, Image, Button } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
-import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
-import {queryProducList, queryShopCheckList} from '../../request/shopProductManage'
+import {AtCard, AtSearchBar} from 'taro-ui'
+import {queryProducList, changeProductState} from '../../request/shopProductManage'
 import './index.less'
 import authCode from "../../config/authCode";
 
@@ -60,7 +60,13 @@ export default class List extends Component {
 
   upOrDown = (ele, e) => {
     e.stopPropagation()
-    console.log(ele)
+    changeProductState({
+      id: ele.id,
+      active_status: ele.active_status
+    }).then(() => {
+      Taro.showToast({title: '操作成功', icon: 'none'});
+      this.queryList()
+    })
   }
 
   toEdit = (ele) => {
