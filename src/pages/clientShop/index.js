@@ -49,11 +49,11 @@ export default class ClientShop extends Component {
             return (
               <View key={ele.id} className='cs-ele'>
                 <AtCard
-                  title={ele.name}
+                  title={ele.nick_name}
                 >
                   <View className='at-row'>
                     <View className='at-col at-col-12'>
-                      <View>手机：{ele.phone}</View>
+                      <View>手机：{ele.telephone}</View>
                       <View>所属门店：{ele.shop_name}</View>
                     </View>
                   </View>

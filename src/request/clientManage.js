@@ -8,32 +8,32 @@ export const queryClientList = (params) => {
     return Promise.resolve([
       {
         id: 1,
-        name: '泥宝宝1',
-        phone: '15068139393',
+        nick_name: '泥宝宝1',
+        telephone: '15068139393',
         shop_name: '门店1',
       },
       {
         id: 2,
-        name: '泥宝宝2',
-        phone: '15068139393',
+        nick_name: '泥宝宝2',
+        telephone: '15068139393',
         shop_name: '门店2',
       },
       {
         id: 3,
-        name: '泥宝宝3',
-        phone: '15068139393',
+        nick_name: '泥宝宝3',
+        telephone: '15068139393',
         shop_name: '门店3',
       },
       {
         id: 4,
-        name: '泥宝宝4',
-        phone: '15068139393',
+        nick_name: '泥宝宝4',
+        telephone: '15068139393',
         shop_name: '门店4',
       },
       {
         id: 5,
-        name: '泥宝宝5',
-        phone: '15068139393',
+        nick_name: '泥宝宝5',
+        telephone: '15068139393',
         shop_name: '门店5',
       }
     ]);
@@ -41,7 +41,7 @@ export const queryClientList = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2020')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
