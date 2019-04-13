@@ -139,6 +139,24 @@ export const querySubscribeList = (params) => {
   })
 }
 
+// 确认预约
+export const confirmSubscribe = (params) => {
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        resolve(parseResult(result.data));
+        task.close();
+      })
+    })
+  })
+}
+
 // 查询用户的充值列表
 export const queryChargeRecordList = (params) => {
   if (mock) {

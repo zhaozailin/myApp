@@ -2,13 +2,14 @@ import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtButton, AtSearchBar} from 'taro-ui'
-import {querySubscribeList} from '../../request/productOrderManage'
+import {confirmSubscribe, querySubscribeList} from '../../request/productOrderManage'
 import './index.less'
 
 export default class MySubscribeList extends Component {
   state = {
     searchkey: '',
-    list: []
+    list: [],
+    oriList: [],
   }
 
   config = {
@@ -16,18 +17,38 @@ export default class MySubscribeList extends Component {
   }
 
   componentDidMount() {
+    this.queryList();
+  }
+
+  queryList = () => {
     querySubscribeList({
       shopId: Taro.getStorageSync('shopId')
     }).then((list) => {
       this.setState({
-        list
+        list,
+        oriList: list
       })
     })
   }
 
   search = () => {
     let key = this.state.searchkey;
-    console.log(key);
+    if (key.trim()) {
+      let newList = [];
+      this.state.oriList.forEach((ele) => {
+        if (ele.name.indexOf(key) !== -1 || ele.phone === key) {
+          newList.push(ele);
+        }
+      })
+      this.setState({
+        list: [...newList]
+      })
+    }
+    else {
+      this.setState({
+        list: [...this.state.oriList]
+      })
+    }
   }
 
   changeSearchInput = (searchkey) => {
@@ -36,13 +57,11 @@ export default class MySubscribeList extends Component {
     })
   }
 
-  componentWillUnmount() {
-  }
-
-  componentDidShow() {
-  }
-
-  componentDidHide() {
+  confirm = (id) => {
+    confirmSubscribe({id: id}).then(() => {
+      Taro.showToast({title: '确认成功', icon: 'none'})
+      this.queryList();
+    })
   }
 
   render() {
@@ -67,7 +86,7 @@ export default class MySubscribeList extends Component {
                       <View>预约时间：{ele.subscribeTime}</View>
                     </View>
                     <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small'>确认</AtButton>
+                      <AtButton type='primary' size='small' onClick={this.confirm.bind(this, ele.id)}>确认</AtButton>
                     </View>
                   </View>
                 </AtCard>

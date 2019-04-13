@@ -44,6 +44,11 @@ export default class MyOrderList extends Component {
         list: [...newList]
       })
     }
+    else {
+      this.setState({
+        list: [...this.state.oriList]
+      })
+    }
   }
 
   changeSearchInput = (searchkey) => {
