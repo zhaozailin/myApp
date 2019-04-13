@@ -77,7 +77,7 @@ export const queryShopInfo = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2027')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
@@ -95,7 +95,7 @@ export const renewSuccess = () => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2033')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);

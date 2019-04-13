@@ -55,12 +55,16 @@ export default class MyShop extends Component {
   }
 
   toPay = () => {
-    let fee = 1;
-    pay(fee, '门店续费', () => {
-      renewSuccess(fee).then(() => {
-        Taro.showToast({title: '续费成功', icon: 'none'});
-      });
-    })
+    // let fee = 1;
+    // pay(fee, '门店续费', () => {
+    //
+    // })
+
+    renewSuccess({
+      shopId: Taro.getStorageSync('shopId')
+    }).then(() => {
+      Taro.showToast({title: '续费成功', icon: 'none'});
+    });
   }
 
   render() {
