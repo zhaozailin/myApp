@@ -314,3 +314,39 @@ export const changeProductState = (params) => {
     })
   })
 }
+
+// 新增产品
+export const addProduct = (params) => {
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        parseResult(resolve, result.data);
+        task.close();
+      })
+    })
+  })
+}
+
+// 编辑产品
+export const editProduct = (params) => {
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2021')})
+      });
+      task.onMessage(result => {
+        parseResult(resolve, result.data);
+        task.close();
+      })
+    })
+  })
+}

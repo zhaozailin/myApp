@@ -1,49 +1,114 @@
-import {Component} from '@tarojs/taro'
+import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import {AtInput, AtButton} from 'taro-ui'
+import {AtInput, AtButton, AtListItem, AtList} from 'taro-ui'
+import {addProduct, editProduct} from '../../request/shopProductManage'
 import './index.less'
 
 export default class Edit extends Component {
   state = {
+    price: '',
+    count: '',
+    active_status: true,
+  }
+
+  componentDidMount = () => {
+    let detail = this.props.product;
+    this.setState({
+      price: detail.price || '',
+      count: detail.count || '',
+    })
   }
 
   config = {
-    navigationBarTitleText: '员工管理'
+    navigationBarTitleText: '编辑商品'
   }
 
-  toSave = () => {
+  changeCount = (count) => {
+    this.setState({count})
+  }
 
+  changePrice = (price) => {
+    this.setState({price})
+  }
+
+  changeState = (data) => {
+    this.setState({
+      active_status: data.detail.value
+    })
+  }
+
+  checkValid = () => {
+    if (!this.state.price) {
+      Taro.showToast({title: '请输入单价', icon: 'none'});
+      return false;
+    }
+    if (!this.state.count) {
+      Taro.showToast({title: '请输入数量', icon: 'none'});
+      return false;
+    }
+    return true;
+  }
+
+  toAdd = () => {
+    if (this.checkValid()) {
+      addProduct({
+
+      })
+    }
+  }
+
+  toEdit = () => {
+    if (this.checkValid()) {
+      editProduct({
+
+      })
+    }
   }
 
   render() {
     return (
       <View className='slm-create-wrap'>
-        <AtInput
-          clear
-          title='员工姓名'
-          type='text'
-          placeholder='请输入员工姓名'
-          value={this.state.name}
-          onChange={this.changeName}
-        />
-        <AtInput
-          clear
-          title='身份证号'
-          type='idcard'
-          placeholder='请输入员工身份证号'
-          value={this.state.identity_cards}
-          onChange={this.changeIdentity}
-        />
-        <AtInput
-          clear
-          title='手机号码'
-          type='phone'
-          placeholder='请输入手机号码'
-          value={this.state.phone}
-          onChange={this.changePhone}
-        />
         <View>
-          <AtButton type='primary' onClick={this.toSave}>保存</AtButton>
+          <Image
+            className='plm-edit-img'
+            src=''
+            mode='widthFix' />
+        </View>
+        <AtInput
+          title='名称'
+          type='text'
+          editable={false}
+          value={'洗澡'}
+        />
+        <AtInput
+          clear
+          title='单价'
+          type='number'
+          placeholder='请输入单价'
+          value={this.state.price}
+          onChange={this.changePrice}
+        />
+        <AtInput
+          clear
+          title='数量'
+          type='number'
+          placeholder='请输入数量'
+          value={this.state.count}
+          onChange={this.changeCount}
+        />
+        <AtList>
+          <AtListItem
+            title='状态'
+            isSwitch
+            switchIsCheck={this.state.active_status}
+            onSwitchChange={this.changeState}
+          />
+        </AtList>
+        <View className='slm-return-btn-wrap'>
+          <AtButton type='primary' onClick={this.toAdd}>新增</AtButton>
+        </View>
+        <View className='slm-return-btn-wrap'>
+          <AtButton type='secondary' onClick={this.toEdit}>保存</AtButton>
         </View>
         <View className='slm-return-btn-wrap'>
           <AtButton type='secondary' onClick={() => {
