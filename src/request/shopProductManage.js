@@ -212,7 +212,7 @@ export const queryEmployeList = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2018')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
@@ -380,6 +380,42 @@ export const editShop = (params) => {
     createWs().then(task => {
       task.onOpen(() => {
         task.send({data: packRequest(params, '2014')})
+      });
+      task.onMessage(result => {
+        parseResult(resolve, result.data);
+        task.close();
+      })
+    })
+  })
+}
+
+// 新增店员
+export const createEmploye = (params) => {
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2016')})
+      });
+      task.onMessage(result => {
+        parseResult(resolve, result.data);
+        task.close();
+      })
+    })
+  })
+}
+
+// 修改店员
+export const editEmploye = (params) => {
+  if (mock) {
+    return Promise.resolve({});
+  }
+  return new Promise((resolve) => {
+    createWs().then(task => {
+      task.onOpen(() => {
+        task.send({data: packRequest(params, '2017')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);

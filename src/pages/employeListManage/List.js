@@ -23,7 +23,7 @@ export default class List extends Component {
 
   queryList = () => {
     queryEmployeList({
-      uId: Taro.getStorageSync('uId')
+      shopId: Taro.getStorageSync('shopId')
     }).then((list) => {
       this.setState({
         list,
@@ -58,21 +58,32 @@ export default class List extends Component {
     })
   }
 
-  changeStatus = (ele) => {
+  changeStatus = (ele, e) => {
+    e.stopPropagation();
     changeEmployeState({
       id: ele.id,
-      active_status: ele.active_status
+      active_status: ele.active_status ? 0 : 1,
+      name: this.state.name,
+      identity_cards: this.state.identity_cards,
+      shop_id: Taro.getStorageSync('shopId')
     }).then(() => {
       Taro.showToast({title: '操作成功', icon: 'none'})
       this.queryList()
     })
   }
 
+  toEdit = (ele) => {
+    // 只有店长才能编辑
+    if (Taro.getStorageSync('auth') === authCode.shopOwner) {
+      this.props.showCreate(ele)
+    }
+  }
+
   render() {
     return (
       <View>
         {
-          Taro.getStorageSync('auth') !== authCode.employe &&
+          Taro.getStorageSync('auth') === authCode.shopOwner &&
           <View className='slm-btn-wrap'>
             <AtButton type='primary' onClick={() => {
               this.props.showCreate();
@@ -87,19 +98,19 @@ export default class List extends Component {
         {
           this.state.list.map(ele => {
             return (
-              <View key={ele.id} className='mol-ele'>
+              <View key={ele.id} className='mol-ele' onClick={this.toEdit.bind(this, ele)}>
                 <AtCard
                   title={ele.name}
                 >
                   <View className='at-row'>
-                    <View className='at-col at-col-10'>
+                    <View className='at-col at-col-7'>
                       <View>电话：{ele.phone}</View>
                       <View>身份证号：{ele.identity_cards}</View>
                     </View>
                     {
                       Taro.getStorageSync('auth') !== authCode.employe &&
-                      <View className='at-col at-col-2'>
-                        <AtButton type='primary' size='small' onClick={this.changeStatus.bind(this, ele)}>{ele.active_status ? '禁用' : '启用'}</AtButton>
+                      <View className='at-col at-col-3'>
+                        <Button type='primary' size='mini' onClick={this.changeStatus.bind(this, ele)}>{ele.active_status ? '禁用' : '启用'}</Button>
                       </View>
                     }
                   </View>
