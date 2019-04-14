@@ -230,7 +230,7 @@ export const changeEmployeState = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2017')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);

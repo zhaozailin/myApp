@@ -63,8 +63,8 @@ export default class List extends Component {
     changeEmployeState({
       id: ele.id,
       active_status: ele.active_status ? 0 : 1,
-      name: this.state.name,
-      identity_cards: this.state.identity_cards,
+      name: ele.name,
+      identity_cards: ele.identity_cards,
       shop_id: Taro.getStorageSync('shopId')
     }).then(() => {
       Taro.showToast({title: '操作成功', icon: 'none'})
@@ -103,7 +103,7 @@ export default class List extends Component {
                   title={ele.name}
                 >
                   <View className='at-row'>
-                    <View className='at-col at-col-7'>
+                    <View className='at-col at-col-9'>
                       <View>电话：{ele.phone}</View>
                       <View>身份证号：{ele.identity_cards}</View>
                     </View>
