@@ -37,6 +37,12 @@
 					"pathName": "pages/main/index",
 					"query": "shopId=1",
 					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "webview",
+					"pathName": "pages/toMother/index",
+					"scene": null
 				}
 			]
 		}

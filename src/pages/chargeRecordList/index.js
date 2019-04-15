@@ -1,6 +1,7 @@
 import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import {AtCard, AtSearchBar} from 'taro-ui'
+import authCode from '../../config/authCode'
 import {queryChargeRecordList} from '../../request/productOrderManage'
 import './index.less'
 
@@ -17,7 +18,7 @@ export default class ChargeRecordList extends Component {
 
   componentDidMount() {
     queryChargeRecordList({
-      shopId: Taro.getStorageSync('shopId')
+      shopId: (Taro.getStorageSync('auth') === authCode.shopOwner) ? Taro.getStorageSync('shopId') : 0
     }).then((list) => {
       this.setState({
         list,
@@ -70,7 +71,7 @@ export default class ChargeRecordList extends Component {
                   <View>微信昵称：{ele.name}</View>
                   <View>手机：{ele.phone}</View>
                   <View>充值金额：{ele.amount}</View>
-                  <View>充值时间：{ele.rechargeTime}</View>
+                  <View>充值时间：{ele.createTime}</View>
                 </AtCard>
               </View>
             )

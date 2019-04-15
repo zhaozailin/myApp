@@ -15,6 +15,7 @@ class App extends Component {
       'pages/index/index',
       'pages/main/index',
       'pages/loginRegister/index',
+      'pages/toMother/index',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -29,12 +30,6 @@ class App extends Component {
     Taro.setStorageSync('uId', 8)
     Taro.setStorageSync('shopId', 25)
   }
-
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数

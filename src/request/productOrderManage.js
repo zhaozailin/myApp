@@ -211,7 +211,7 @@ export const queryChargeRecordList = (params) => {
   return new Promise((resolve) => {
     createWs().then(task => {
       task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
+        task.send({data: packRequest(params, '2023')})
       });
       task.onMessage(result => {
         parseResult(resolve, result.data);
