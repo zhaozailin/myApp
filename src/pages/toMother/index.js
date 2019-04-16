@@ -14,7 +14,7 @@ export default class ToMother extends Component {
   render() {
     return (
       <View>
-        <web-view src="http://"></web-view>
+        <web-view src="https://www.1wang.xyz"/>
       </View>
     )
   }
