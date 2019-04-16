@@ -1,6 +1,5 @@
 import Taro from '@tarojs/taro'
 import {parseResult} from "../utils/request";
-import eventCallback from "./eventCallback";
 
 let wsTask;
 

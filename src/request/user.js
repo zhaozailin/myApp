@@ -1,10 +1,10 @@
-import {createWs} from '../ws/index';
 import mock from '../config/mock';
-import {parseResult, packRequest} from '../utils/request';
 import authCode from '../config/authCode';
+import {forkAjax} from '../ws/forkAjax';
 
 let resolves = {
-  loginResolve: {}
+  codeList: ['2001', '2030', '2021'],
+  list: {}
 }
 
 export default resolves;
@@ -16,12 +16,7 @@ export const login = (params) => {
       auth: authCode.manager
     });
   }
-  return new Promise((resolve) => {
-    resolves.loginResolve = resolve;
-    createWs('2001').then((task) => {
-      task.send({data: packRequest(params, '2001')})
-    })
-  })
+  return forkAjax('2001', params, resolves)
 }
 
 // 注册
@@ -29,17 +24,7 @@ export const register = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2030')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2030', params, resolves)
 }
 
 // 获取登录用户信息
@@ -51,17 +36,7 @@ export const queryUserInfo = (params) => {
       shopId: 1
     });
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2021', params, resolves)
 }
 
 // 获取门店信息
@@ -75,17 +50,7 @@ export const queryShopInfo = (params) => {
       warn: true,
     });
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2027')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2027', params, resolves)
 }
 
 // 续费
@@ -93,17 +58,5 @@ export const renewSuccess = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2033')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2033', params, resolves)
 }
-
-
