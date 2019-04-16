@@ -1,6 +1,11 @@
-import {createWs} from '../ws/index';
 import mock from '../config/mock';
-import {parseResult, packRequest} from '../utils/request';
+import {forkAjax} from "../ws/forkAjax";
+
+let resolves = {
+  list: {},
+};
+
+export default resolves;
 
 // 查询我的订单列表
 export const queryOrderList = (params) => {
@@ -48,17 +53,7 @@ export const queryOrderList = (params) => {
       }
     ]);
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2021', params, resolves)
 }
 
 // 确认订单
@@ -66,22 +61,11 @@ export const confirmOrder = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2021', params, resolves)
 }
 
 // 查询我的预定列表
 export const querySubscribeList = (params) => {
-  // let mock = false;
   if (mock) {
     return Promise.resolve([
       {
@@ -126,17 +110,7 @@ export const querySubscribeList = (params) => {
       }
     ]);
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2024')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2024', params, resolves)
 }
 
 // 确认预约
@@ -144,17 +118,7 @@ export const confirmSubscribe = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2021', params, resolves)
 }
 
 // 查询用户的充值列表
@@ -208,17 +172,7 @@ export const queryChargeRecordList = (params) => {
       }
     ]);
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2023')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2023', params, resolves)
 }
 
 // 查询用户的消费列表
@@ -277,17 +231,7 @@ export const queryConsumeRecordList = (params) => {
       }
     ]);
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2021')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2021', params, resolves)
 }
 
 

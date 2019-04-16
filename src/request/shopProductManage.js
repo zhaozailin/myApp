@@ -1,6 +1,11 @@
-import {createWs} from '../ws/index';
 import mock from '../config/mock';
-import {parseResult, packRequest} from '../utils/request';
+import {forkAjax} from "../ws/forkAjax";
+
+let resolves = {
+  list: {},
+};
+
+export default resolves;
 
 // 查询门店列表
 export const queryShopList = (params) => {
@@ -59,17 +64,7 @@ export const queryShopList = (params) => {
       },
     ]);
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2015')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2015', params, resolves)
 }
 
 // 改变门店状态
@@ -77,17 +72,7 @@ export const changeState = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2032')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2032', params, resolves)
 }
 
 // 查询门店审核列表
@@ -137,17 +122,7 @@ export const queryShopCheckList = (params) => {
       },
     ]);
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2015')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2015', params, resolves)
 }
 
 // 确认审核通过
@@ -155,17 +130,7 @@ export const confirmCheck = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2031')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2031', params, resolves)
 }
 
 // 查询员工列表
@@ -209,17 +174,7 @@ export const queryEmployeList = (params) => {
       },
     ]);
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2018')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2018', params, resolves)
 }
 
 // 改变员工状态
@@ -227,17 +182,7 @@ export const changeEmployeState = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2017')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2017', params, resolves)
 }
 
 // 查询产品列表
@@ -286,17 +231,7 @@ export const queryProducList = (params) => {
       },
     ]);
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2012')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2012', params, resolves)
 }
 
 // 上下架产品
@@ -304,17 +239,7 @@ export const changeProductState = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2011')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2011', params, resolves)
 }
 
 // 新增产品
@@ -322,17 +247,7 @@ export const addProduct = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2010')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2010', params, resolves)
 }
 
 // 编辑产品
@@ -340,17 +255,7 @@ export const editProduct = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2011')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2011', params, resolves)
 }
 
 // 新增门店
@@ -358,17 +263,7 @@ export const createShop = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2013')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2013', params, resolves)
 }
 
 // 修改门店
@@ -376,17 +271,7 @@ export const editShop = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2014')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2014', params, resolves)
 }
 
 // 新增店员
@@ -394,17 +279,7 @@ export const createEmploye = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2016')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2016', params, resolves)
 }
 
 // 修改店员
@@ -412,15 +287,5 @@ export const editEmploye = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2017')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2017', params, resolves)
 }

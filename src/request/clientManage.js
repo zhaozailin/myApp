@@ -1,6 +1,11 @@
-import {createWs} from '../ws/index';
 import mock from '../config/mock';
-import {parseResult, packRequest} from '../utils/request';
+import {forkAjax} from "../ws/forkAjax";
+
+let resolves = {
+  list: {},
+};
+
+export default resolves;
 
 // 查询客户列表
 export const queryClientList = (params) => {
@@ -38,15 +43,5 @@ export const queryClientList = (params) => {
       }
     ]);
   }
-  return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2020')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
-    })
-  })
+  return forkAjax('2020', params, resolves)
 }

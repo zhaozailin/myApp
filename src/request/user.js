@@ -3,9 +3,8 @@ import authCode from '../config/authCode';
 import {forkAjax} from '../ws/forkAjax';
 
 let resolves = {
-  codeList: ['2001', '2030', '2021'],
-  list: {}
-}
+  list: {},
+};
 
 export default resolves;
 
