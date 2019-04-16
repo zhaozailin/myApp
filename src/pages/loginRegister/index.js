@@ -1,4 +1,4 @@
-import {Component} from '@tarojs/taro'
+import Taro, {Component} from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import {AtSegmentedControl} from 'taro-ui'
 import './index.less'
@@ -15,6 +15,9 @@ export default class LoginRegister extends Component {
   }
 
   componentDidMount() {
+    // 本地存储推荐人手机号
+    let recommendPhone = this.$router.params.phone;
+    Taro.setStorageSync('recommendPhone', recommendPhone)
   }
 
   switch = (current) => {

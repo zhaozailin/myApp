@@ -48,6 +48,7 @@ export default class Login extends Component {
 
         Taro.setStorageSync('auth', result.auth)
         Taro.setStorageSync('shopId', result.shopId)
+        Taro.setStorageSync('username', this.state.username)
 
         Taro.redirectTo({
           url: '/pages/main/index'

@@ -16,6 +16,7 @@ class App extends Component {
       'pages/main/index',
       'pages/loginRegister/index',
       'pages/toMother/index',
+      'pages/myShop/index',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -29,6 +30,7 @@ class App extends Component {
     // FIXME 暂时写在这里，后续会写到登录里 admin
     Taro.setStorageSync('uId', 8)
     Taro.setStorageSync('shopId', 25)
+    Taro.setStorageSync('username', '15888888888')
   }
 
   // 在 App 类中的 render() 函数没有实际作用

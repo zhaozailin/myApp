@@ -12,7 +12,7 @@ export default class Register extends Component {
     identity_cards: '',
     phone: '',
     shop_address: '',
-    referee_name: '',
+    referee_name: Taro.getStorageSync('recommendPhone') || '',
     shop_name: '',
     payShow: false,
     yearNum: 1,

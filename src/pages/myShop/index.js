@@ -34,14 +34,14 @@ export default class MyShop extends Component {
     //     // let payModel = r.data;
     //   }
     // })
-    this.onShareAppMessage();
+    // this.onShareAppMessage();
   }
 
-  onShareAppMessage1 = () => {
+  onShareAppMessage () {
     return {
-      title: '标题',
-      path: '/pages/loginRegister/index?phone=' + '15068140482',
-      imageUrl: 'http://src.onlinedown.net/images/xcs/4/fbbf04b527486a623eaa33fc8304bbca396afb34-a0dcd7fbbcba9dad42759929b02fdbd52bd03aeb.png',
+      title: '母婴商店',
+      path: '/pages/loginRegister/index?phone=' + Taro.getStorageSync('username'),
+      imageUrl: 'https://www.1wang.xyz/img/xizao.jpeg',
       success(r) {
         console.log(r);
         wx.showShareMenu({
@@ -59,7 +59,6 @@ export default class MyShop extends Component {
     // pay(fee, '门店续费', () => {
     //
     // })
-
     renewSuccess({
       shopId: Taro.getStorageSync('shopId')
     }).then(() => {
