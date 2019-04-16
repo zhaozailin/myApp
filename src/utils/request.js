@@ -1,11 +1,15 @@
 import {getLength} from "./math";
 import Taro from '@tarojs/taro'
+import eventCallback from "../ws/eventCallback";
 
-export const parseResult = (resolve, result) => {
+export const parseResult = (requestCode, result) => {
   Taro.hideLoading();
-  let resultJson = JSON.parse(result.substring(8))
+
+  let reqCode = result.substring(0, 4);
+
+  let resultJson = JSON.parse(result.substring(8));
   if (resultJson.code === 200) {
-    resolve(resultJson.data);
+    eventCallback['cb' + reqCode](resultJson.data)
   }
   if (resultJson.code === 100) {
     Taro.showToast({title: '账号密码错误', icon: 'none'})
@@ -19,7 +23,6 @@ export const parseResult = (resolve, result) => {
   if (resultJson.code === 106) {
     Taro.showToast({title: '该员工手机号已经被注册', icon: 'none'})
   }
-
 };
 
 export const packRequest = (params, requestId) => {

@@ -3,6 +3,12 @@ import mock from '../config/mock';
 import {parseResult, packRequest} from '../utils/request';
 import authCode from '../config/authCode';
 
+let resolves = {
+  loginResolve: {}
+}
+
+export default resolves;
+
 // 登录
 export const login = (params) => {
   if (mock) {
@@ -11,14 +17,9 @@ export const login = (params) => {
     });
   }
   return new Promise((resolve) => {
-    createWs().then(task => {
-      task.onOpen(() => {
-        task.send({data: packRequest(params, '2001')})
-      });
-      task.onMessage(result => {
-        parseResult(resolve, result.data);
-        task.close();
-      })
+    resolves.loginResolve = resolve;
+    createWs('2001').then((task) => {
+      task.send({data: packRequest(params, '2001')})
     })
   })
 }

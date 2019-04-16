@@ -17,15 +17,6 @@ export default class LoginRegister extends Component {
   componentDidMount() {
   }
 
-  componentWillUnmount() {
-  }
-
-  componentDidShow() {
-  }
-
-  componentDidHide() {
-  }
-
   switch = (current) => {
     this.setState({current})
   }
