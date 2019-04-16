@@ -24,32 +24,37 @@ export default class MyShop extends Component {
     })
   }
 
-  shareWeCode = () => {
-    // Taro.request({
-    //   data: {
-    //     phone: '15068140482',
-    //   },
-    //   url: 'http://localhost:8000/getwxacode',
-    //   success: (r) => {
-    //     // let payModel = r.data;
-    //   }
-    // })
-    // this.onShareAppMessage();
-  }
-
-  onShareAppMessage () {
-    return {
-      title: '母婴商店',
-      path: '/pages/loginRegister/index?phone=' + Taro.getStorageSync('username'),
-      imageUrl: 'https://www.1wang.xyz/img/xizao.jpeg',
-      success(r) {
-        console.log(r);
-        wx.showShareMenu({
-          withShareTicket: true
-        })
-      },
-      fail(r) {
-        console.log(r);
+  onShareAppMessage (e) {
+    if (e.target.id === 'plat') {
+      return {
+        title: '母婴商店',
+        path: '/pages/loginRegister/index?phone=' + Taro.getStorageSync('username'),
+        imageUrl: 'https://www.1wang.xyz/img/xizao.jpeg',
+        success(r) {
+          console.log(r);
+          wx.showShareMenu({
+            withShareTicket: true
+          })
+        },
+        fail(r) {
+          console.log(r);
+        }
+      }
+    }
+    else if (e.target.id === 'shop') {
+      return {
+        title: '母婴商店',
+        path: '/pages/toMother/index?shopId=' + Taro.getStorageSync('shopId'),
+        imageUrl: 'https://www.1wang.xyz/img/xizao.jpeg',
+        success(r) {
+          console.log(r);
+          wx.showShareMenu({
+            withShareTicket: true
+          })
+        },
+        fail(r) {
+          console.log(r);
+        }
       }
     }
   }
@@ -89,9 +94,9 @@ export default class MyShop extends Component {
         }
         <View className='ms-btn-wrap'>
           <View className='ms-btn-share'>
-            <Button type='primary' openType='share'>分享链接 邀请好友</Button>
+            <Button type='primary' id={'plat'} openType='share'>分享门店平台给别人</Button>
           </View>
-          <AtButton type='secondary' onClick={this.shareWeCode}>生成门店二维码</AtButton>
+          <Button id={'shop'} openType='share'>分享我的门店给用户</Button>
         </View>
       </View>
     )
