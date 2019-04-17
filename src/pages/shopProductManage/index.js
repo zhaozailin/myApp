@@ -22,8 +22,8 @@ export default class ShopProductManage extends Component {
         tabList: [
           {title: '门店列表'},
           {title: '门店审核'},
-          {title: '员工管理'},
-          {title: '商品管理'}
+          // {title: '员工管理'},
+          // {title: '商品管理'}
         ]
       })
     }
@@ -72,12 +72,12 @@ export default class ShopProductManage extends Component {
             {(this.state.current === 1 && Taro.getStorageSync('auth') === authCode.manager) && <ShopCheckList/>}
             {(this.state.current === 1 && Taro.getStorageSync('auth') === authCode.shopOwner) && <ProductListManage/>}
           </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={2}>
-            {(this.state.current === 2 && Taro.getStorageSync('auth') === authCode.manager) && <EmployeListManage/>}
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={3}>
-            {(this.state.current === 3 && Taro.getStorageSync('auth') === authCode.manager) && <ProductListManage/>}
-          </AtTabsPane>
+          {/*<AtTabsPane current={this.state.current} index={2}>*/}
+            {/*{(this.state.current === 2 && Taro.getStorageSync('auth') === authCode.manager) && <EmployeListManage/>}*/}
+          {/*</AtTabsPane>*/}
+          {/*<AtTabsPane current={this.state.current} index={3}>*/}
+            {/*{(this.state.current === 3 && Taro.getStorageSync('auth') === authCode.manager) && <ProductListManage/>}*/}
+          {/*</AtTabsPane>*/}
         </AtTabs>
       </View>
     )

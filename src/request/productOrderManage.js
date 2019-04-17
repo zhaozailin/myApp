@@ -61,7 +61,7 @@ export const confirmOrder = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return forkAjax('2021', params, resolves)
+  return forkAjax('2022', params, resolves)
 }
 
 // 查询我的预定列表
@@ -118,7 +118,7 @@ export const confirmSubscribe = (params) => {
   if (mock) {
     return Promise.resolve({});
   }
-  return forkAjax('2021', params, resolves)
+  return forkAjax('2025', params, resolves)
 }
 
 // 查询用户的充值列表

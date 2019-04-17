@@ -26,18 +26,6 @@ export const register = (params) => {
   return forkAjax('2030', params, resolves)
 }
 
-// 获取登录用户信息
-export const queryUserInfo = (params) => {
-  if (mock) {
-    return Promise.resolve({
-      // 1-管理员，2-店长，3-员工
-      auth: authCode.shopOwner,
-      shopId: 1
-    });
-  }
-  return forkAjax('2021', params, resolves)
-}
-
 // 获取门店信息
 export const queryShopInfo = (params) => {
   if (mock) {

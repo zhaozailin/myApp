@@ -11,9 +11,6 @@ export default {
   cb2030: (res) => {
     userResolves.list.resolve2030(res);
   },
-  cb2021: (res) => {
-    userResolves.list.resolve2021(res);
-  },
   cb2027: (res) => {
     userResolves.list.resolve2027(res);
   },
@@ -62,6 +59,12 @@ export default {
   },
   cb2024: (res) => {
     productOrderManage.list.resolve2024(res);
+  },
+  cb2021: (res) => {
+    productOrderManage.list.resolve2021(res);
+  },
+  cb2022: (res) => {
+    productOrderManage.list.resolve2022(res);
   },
 
   // clientManage
