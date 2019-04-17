@@ -32,7 +32,7 @@ export default class ChargeRecordList extends Component {
     if (key.trim()) {
       let newList = [];
       this.state.oriList.forEach((ele) => {
-        if (ele.name.indexOf(key) !== -1 || ele.phone === key) {
+        if (ele.name.indexOf(key) !== -1 || ele.productName.indexOf(key) !== -1 || ele.phone === key) {
           newList.push(ele);
         }
       })

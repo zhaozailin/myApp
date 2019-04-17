@@ -23,6 +23,12 @@ export const createWs = (requestCode) => {
         task.onMessage(result => {
           parseResult(requestCode, result.data);
         })
+        task.onError(function (e) {
+          console.log('onError', e)
+        })
+        task.onClose(function (e) {
+          console.log('onClose: ', e)
+        })
       })
     }
   });
