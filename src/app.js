@@ -16,7 +16,6 @@ class App extends Component {
       'pages/main/index',
       'pages/loginRegister/index',
       'pages/toMother/index',
-      'pages/myShop/index',
     ],
     window: {
       backgroundTextStyle: 'light',

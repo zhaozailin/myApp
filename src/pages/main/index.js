@@ -14,6 +14,41 @@ export default class Main extends Component {
     tabList: [],
   }
 
+  onShareAppMessage (e) {
+    if (e.target.id === 'plat') {
+      return {
+        title: '母婴商店',
+        path: '/pages/loginRegister/index?phone=' + Taro.getStorageSync('username'),
+        imageUrl: 'https://www.1wang.xyz/img/xizao.jpeg',
+        success(r) {
+          console.log(r);
+          wx.showShareMenu({
+            withShareTicket: true
+          })
+        },
+        fail(r) {
+          console.log(r);
+        }
+      }
+    }
+    else if (e.target.id === 'shop') {
+      return {
+        title: '母婴商店',
+        path: '/pages/toMother/index?shopId=' + Taro.getStorageSync('shopId'),
+        imageUrl: 'https://www.1wang.xyz/img/xizao.jpeg',
+        success(r) {
+          console.log(r);
+          wx.showShareMenu({
+            withShareTicket: true
+          })
+        },
+        fail(r) {
+          console.log(r);
+        }
+      }
+    }
+  }
+
   componentDidMount = () => {
 
     // 管理员

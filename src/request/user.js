@@ -12,7 +12,7 @@ export default resolves;
 export const login = (params) => {
   if (mock) {
     return Promise.resolve({
-      auth: authCode.manager
+      auth: authCode.shopOwner
     });
   }
   return forkAjax('2001', params, resolves)

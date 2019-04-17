@@ -35,3 +35,20 @@ export const pay = (totalFee, productDesc, callback) => {
     }
   })
 }
+
+export const getOpenId = (callback) => {
+  wx.login({
+    success: (result) => {
+      let code = result.code;
+      Taro.request({
+        data: {
+          code: code,
+        },
+        url: 'http://localhost:8000/pay',
+        success: (r) => {
+          callback(r.data.openid)
+        }
+      })
+    }
+  })
+}
