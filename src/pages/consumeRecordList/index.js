@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import {AtCard, AtSearchBar} from 'taro-ui'
 import {queryConsumeRecordList} from '../../request/productOrderManage'
 import './index.less'
+import authCode from "../../config/authCode";
 
 export default class ConsumeRecordList extends Component {
   state = {
@@ -17,7 +18,7 @@ export default class ConsumeRecordList extends Component {
 
   componentDidMount() {
     queryConsumeRecordList({
-      shopId: Taro.getStorageSync('shopId')
+      shopId: (Taro.getStorageSync('auth') === authCode.shopOwner) ? Taro.getStorageSync('shopId') : 0
     }).then((list) => {
       this.setState({
         list,
