@@ -32,7 +32,7 @@ export default class ToMother extends Component {
   render() {
     return (
       <View>
-        <web-view src={'http://localhost:3000?openId=' + this.state.openId + '&shopId=' + this.state.shopId}/>
+        <web-view src={'http://localhost:3000?openId=' + this.state.openId + '&shopId=' + this.state.shopId +'#/main'}/>
       </View>
     )
   }
