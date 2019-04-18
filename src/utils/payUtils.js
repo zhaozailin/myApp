@@ -44,7 +44,7 @@ export const getOpenId = (callback) => {
         data: {
           code: code,
         },
-        url: 'http://localhost:8000/pay',
+        url: 'http://localhost:8001/getOpenId',
         success: (r) => {
           callback(r.data.openid)
         }
