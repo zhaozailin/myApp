@@ -10,7 +10,7 @@ export const createWs = (requestCode) => {
     }
     else {
       Taro.connectSocket({
-        url: 'ws://47.110.242.98:5505',
+        url: 'wss://1wang.xyz/websocket',
         success: function () {
           console.log('connect success')
         }

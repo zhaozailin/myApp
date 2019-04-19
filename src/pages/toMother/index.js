@@ -77,7 +77,7 @@ export default class ToMother extends Component {
           <Button className='auth-enter-btn' type='primary' onClick={this.enter}>点击进入</Button>
         </View>
         }
-        {this.state.weAuth === 1 && <web-view src={'http://localhost:3000?openId=' + this.state.openId + '&shopId=' + this.state.shopId +'&nickname=' + this.state.nickname + '#/main'}/>}
+        {this.state.weAuth === 1 && <web-view src={'https://1wang.xyz?openId=' + this.state.openId + '&shopId=' + this.state.shopId +'&nickname=' + this.state.nickname + '#/main'}/>}
       </View>
     )
   }
