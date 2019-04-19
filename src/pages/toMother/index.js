@@ -24,7 +24,7 @@ export default class ToMother extends Component {
         // 获取登录用户信息
         Taro.getUserInfo().then((res2) => {
           this.setState({
-            nickname: res2.userInfo.nickName,
+            nickname: encodeURIComponent(res2.userInfo.nickName),
             weAuth: 1,
           })
         })
@@ -59,7 +59,7 @@ export default class ToMother extends Component {
   enter = () => {
     Taro.getUserInfo().then((res) => {
       this.setState({
-        nickname: res.userInfo.nickName,
+        nickname: encodeURIComponent(res.userInfo.nickName),
         weAuth: 1,
       })
     }, () => {
