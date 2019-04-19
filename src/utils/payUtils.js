@@ -10,7 +10,7 @@ export const pay = (totalFee, productDesc, callback) => {
           totalFee: totalFee,
           productDesc: productDesc,
         },
-        url: 'http://47.110.242.98:8000/pay',
+        url: 'https://1wang.xyz:8000/pay',
         success: (r) => {
           let payModel = r.data;
           wx.requestPayment({
@@ -44,7 +44,7 @@ export const getOpenId = (callback) => {
         data: {
           code: code,
         },
-        url: 'http://localhost:8001/getOpenId',
+        url: 'https://1wang.xyz:8000/getOpenId',
         success: (r) => {
           callback(r.data.openid)
         }
