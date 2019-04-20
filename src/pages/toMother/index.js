@@ -8,6 +8,7 @@ export default class ToMother extends Component {
     openId: '',
     shopId: '',
     nickname: '',
+    avatarUrl: '',
     // 微信授权，1-已授权，0-未授权，-1-空白视图
     weAuth: -1
   }
@@ -25,6 +26,7 @@ export default class ToMother extends Component {
         Taro.getUserInfo().then((res2) => {
           this.setState({
             nickname: encodeURIComponent(res2.userInfo.nickName),
+            avatarUrl: encodeURIComponent(res2.userInfo.avatarUrl),
             weAuth: 1,
           })
         })
@@ -58,8 +60,10 @@ export default class ToMother extends Component {
 
   enter = () => {
     Taro.getUserInfo().then((res) => {
+      console.log(res.userInfo.avatarUrl)
       this.setState({
         nickname: encodeURIComponent(res.userInfo.nickName),
+        avatarUrl: encodeURIComponent(res.userInfo.avatarUrl),
         weAuth: 1,
       })
     }, () => {
@@ -77,7 +81,7 @@ export default class ToMother extends Component {
           <Button className='auth-enter-btn' type='primary' onClick={this.enter}>点击进入</Button>
         </View>
         }
-        {this.state.weAuth === 1 && <web-view src={'https://1wang.xyz?openId=' + this.state.openId + '&shopId=' + this.state.shopId +'&nickname=' + this.state.nickname + '#/main'}/>}
+        {this.state.weAuth === 1 && <web-view src={'https://1wang.xyz?openId=' + this.state.openId + '&shopId=' + this.state.shopId +'&nickname=' + this.state.nickname + '&avatarUrl=' + this.state.avatarUrl + '#/main'}/>}
       </View>
     )
   }

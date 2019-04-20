@@ -4,7 +4,7 @@
 	"description": "母婴店铺端",
 	"appid": "wxf4676cbc80461f79",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
