@@ -22,7 +22,48 @@ export const initBottomTabList = () => {
 }
 
 export const changeBottomTab = (cur) => {
-  console.log(cur);
+  let url;
+
+  // 管理员
+  if (Taro.getStorageSync('auth') === authCode.manager) {
+    if (cur === 0) {
+      url = '/pages/chargeRecordList/index'
+    }
+    else if (cur === 1) {
+      url = '/pages/shopListManage/index'
+    }
+    else if (cur === 2) {
+      url = '/pages/clientManage/index'
+    }
+  }
+  // 店长
+  else if (Taro.getStorageSync('auth') === authCode.shopOwner) {
+    if (cur === 0) {
+      url = '/pages/myOrderList/index'
+    }
+    else if (cur === 1) {
+      url = '/pages/employeListManage/index'
+    }
+    else if (cur === 2) {
+      url = '/pages/myShop/index'
+    }
+  }
+  // 员工
+  if (Taro.getStorageSync('auth') === authCode.employe) {
+    if (cur === 0) {
+      url = '/pages/mySubscribeList/index'
+    }
+    else if (cur === 1) {
+      url = '/pages/employeListManage/index'
+    }
+    else if (cur === 2) {
+      url = '/pages/myShop/index'
+    }
+  }
+
+  Taro.redirectTo({
+    url
+  })
 }
 
 // 工单管理tab列表

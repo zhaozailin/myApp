@@ -23,6 +23,7 @@ class App extends Component {
       'pages/shopCheckList/index',
       'pages/employeListManage/index',
       'pages/productListManage/index',
+      'pages/clientManage/index',
       'pages/myShop/index',
     ],
 
