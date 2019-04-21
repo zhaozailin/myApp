@@ -18,10 +18,6 @@ export default class Create extends Component {
     isEdit: false,
   }
 
-  config = {
-    navigationBarTitleText: '门店管理'
-  }
-
   componentDidMount() {
     if (this.props.shop.id) {
       let shopInfo = Object.assign({}, this.props.shop)

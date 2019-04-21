@@ -34,6 +34,7 @@ export default class ShopListManage extends Component {
   }
 
   render() {
+    console.log(this.state.showList)
     return (
       <View className='m-wrap'>
         <AtTabs swipeable={false} current={0} tabList={initShopTabList()} onClick={(cur) => {
@@ -41,9 +42,9 @@ export default class ShopListManage extends Component {
         }}/>
 
         <View className='mol-wrap'>
-          {this.state.showList && <List ref={(obj) => this.listRef = obj} showCreate={(shop) => {
-            this.setState({showList: false})
+          {this.state.showList && <List ref={(obj) => {this.listRef = obj}} showCreate={(shop) => {
             this.setState({
+              showList: false,
               shop: shop || {}
             })
           }}/>}
