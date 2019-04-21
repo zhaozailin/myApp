@@ -98,14 +98,14 @@ export default class List extends Component {
                   title={ele.name}
                 >
                   <View className='at-row'>
-                    <View className='at-col at-col-10'>
+                    <View className='at-col at-col-9'>
                       <View>电话：{ele.phone}</View>
                       <View>门店地址：{ele.addr}</View>
                       <View>过期日期：{ele.expiredate}</View>
                       <View>门店编号：{ele.id}</View>
                     </View>
-                    <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small' onClick={this.changeState.bind(this, ele)}>{ele.active ? '禁用' : '启用'}</AtButton>
+                    <View className='at-col at-col-3'>
+                      <Button type='primary' size='mini' onClick={this.changeState.bind(this, ele)}>{ele.active ? '禁用' : '启用'}</Button>
                     </View>
                   </View>
                 </AtCard>
