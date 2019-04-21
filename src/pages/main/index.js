@@ -50,27 +50,6 @@ export default class Main extends Component {
   }
 
   componentDidMount = () => {
-
-    // 管理员
-    if (Taro.getStorageSync('auth') === authCode.manager) {
-      this.setState({
-        tabList: [
-          { title: '工单管理', iconType: 'bullet-list' },
-          { title: '门店管理', iconType: 'shopping-bag-2' },
-          { title: '客户管理', iconType: 'user' }
-        ]
-      })
-    }
-    // 店长、员工
-    else if (Taro.getStorageSync('auth') === authCode.shopOwner || Taro.getStorageSync('auth') === authCode.employe) {
-      this.setState({
-        tabList: [
-          { title: '工单管理', iconType: 'bullet-list' },
-          { title: '门店管理', iconType: 'shopping-bag-2' },
-          { title: '我的门店', iconType: 'user' }
-        ]
-      })
-    }
   }
 
   config = {

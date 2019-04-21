@@ -6,7 +6,7 @@ let wsTask;
 export const createWs = (requestCode) => {
   return new Promise((resolve) => {
     console.log(wsTask)
-    if (wsTask && wsTask.CONNECTING) {
+    if (wsTask && wsTask.OPEN) {
       resolve(wsTask)
     }
     else {

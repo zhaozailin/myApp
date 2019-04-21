@@ -11,7 +11,15 @@ export default class LoginRegister extends Component {
   }
 
   config = {
-    navigationBarTitleText: '登录'
+    navigationBarTitleText: '登录',
+    "enablePullDownRefresh":true,
+  }
+
+  onPullDownRefresh(){
+      wx.stopPullDownRefresh()
+    // Taro.startPullDownRefresh().then(() => {
+    //   Taro.stopPullDownRefresh();
+    // })
   }
 
   componentDidMount() {
