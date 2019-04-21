@@ -4,6 +4,7 @@ import eventCallback from "../ws/eventCallback";
 
 export const parseResult = (requestCode, result) => {
   Taro.hideLoading();
+  wx.stopPullDownRefresh();
 
   let reqCode = result.substring(0, 4);
 
