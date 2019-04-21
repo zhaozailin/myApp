@@ -65,6 +65,13 @@
 					"pathName": "pages/shopListManage/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "员工管理",
+					"pathName": "pages/employeListManage/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

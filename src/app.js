@@ -21,6 +21,8 @@ class App extends Component {
       'pages/consumeRecordList/index',
       'pages/shopListManage/index',
       'pages/shopCheckList/index',
+      'pages/employeListManage/index',
+      'pages/productListManage/index',
     ],
 
     window: {
