@@ -1,9 +1,15 @@
 import Taro, {Component} from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import {View} from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
-import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
+import {AtCard, AtSearchBar, AtButton, AtTabBar, AtTabs} from 'taro-ui'
 import {queryShopCheckList, confirmCheck} from '../../request/shopProductManage'
 import './index.less'
+import {
+  initBottomTabList,
+  changeBottomTab,
+  changeShopTab,
+  initShopTabList
+} from "../../utils/uiUtils";
 
 export default class ShopCheckList extends Component {
   state = {
@@ -13,14 +19,21 @@ export default class ShopCheckList extends Component {
   }
 
   config = {
-    navigationBarTitleText: '门店审核'
+    navigationBarTitleText: '门店管理',
+    enablePullDownRefresh: true,
+  }
+
+  onPullDownRefresh() {
+    this.queryList(() => {
+      wx.stopPullDownRefresh();
+    })
   }
 
   componentDidMount() {
     this.queryList();
   }
 
-  queryList = () => {
+  queryList = (callback) => {
     this.setState({
       list: [],
       oriList: []
@@ -31,6 +44,8 @@ export default class ShopCheckList extends Component {
         this.setState({
           list,
           oriList: list
+        }, () => {
+          callback && callback()
         })
       })
     })
@@ -71,35 +86,50 @@ export default class ShopCheckList extends Component {
 
   render() {
     return (
-      <View className='mol-wrap'>
-        <AtSearchBar
-          value={this.state.searchkey}
-          onChange={this.changeSearchInput}
-          onActionClick={this.search}
+      <View className='m-wrap'>
+        <AtTabs swipeable={false} current={1} tabList={initShopTabList()} onClick={(cur) => {
+          changeShopTab(cur)
+        }}/>
+
+        <View className='mol-wrap'>
+          <AtSearchBar
+            value={this.state.searchkey}
+            onChange={this.changeSearchInput}
+            onActionClick={this.search}
+          />
+          {
+            this.state.list.map(ele => {
+              return (
+                <View key={ele.id} className='mol-ele'>
+                  <AtCard
+                    title={ele.name}
+                  >
+                    <View className='at-row'>
+                      <View className='at-col at-col-10'>
+                        <View>电话：{ele.phone}</View>
+                        <View>门店地址：{ele.addr}</View>
+                        <View>过期日期：{ele.expiredate}</View>
+                        <View>门店编号：{ele.id}</View>
+                      </View>
+                      <View className='at-col at-col-2'>
+                        <AtButton type='primary' size='small' onClick={this.confirm.bind(this, ele.id)}>通过</AtButton>
+                      </View>
+                    </View>
+                  </AtCard>
+                </View>
+              )
+            })
+          }
+        </View>
+
+        <AtTabBar
+          fixed
+          tabList={initBottomTabList()}
+          onClick={(cur) => {
+            changeBottomTab(cur)
+          }}
+          current={1}
         />
-        {
-          this.state.list.map(ele => {
-            return (
-              <View key={ele.id} className='mol-ele'>
-                <AtCard
-                  title={ele.name}
-                >
-                  <View className='at-row'>
-                    <View className='at-col at-col-10'>
-                      <View>电话：{ele.phone}</View>
-                      <View>门店地址：{ele.addr}</View>
-                      <View>过期日期：{ele.expiredate}</View>
-                      <View>门店编号：{ele.id}</View>
-                    </View>
-                    <View className='at-col at-col-2'>
-                      <AtButton type='primary' size='small' onClick={this.confirm.bind(this, ele.id)}>通过</AtButton>
-                    </View>
-                  </View>
-                </AtCard>
-              </View>
-            )
-          })
-        }
       </View>
     )
   }
