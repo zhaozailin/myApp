@@ -115,7 +115,7 @@ export default class Create extends Component {
           shop_address: this.state.shop_address,
           shop_name: this.state.shop_name,
           phone: this.state.phone,
-          password: this.state.phone.slice(-4)
+          password: this.state.phone.slice(-6)
         }).then(() => {
           Taro.showToast({title: '新增成功', icon: 'none'})
           this.props.back();

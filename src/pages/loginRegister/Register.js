@@ -98,7 +98,7 @@ export default class Register extends Component {
         shop_address: this.state.shop_address,
         referee_name: this.state.referee_name,
         shop_name: this.state.shop_name,
-        password: this.state.phone.slice(-4)
+        password: this.state.phone.slice(-6)
       }).then(() => {
         this.setState({payShow: true})
         wx.showToast({
