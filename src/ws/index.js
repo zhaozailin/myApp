@@ -5,7 +5,8 @@ let wsTask;
 
 export const createWs = (requestCode) => {
   return new Promise((resolve) => {
-    if (wsTask) {
+    console.log(wsTask)
+    if (wsTask && wsTask.CONNECTING) {
       resolve(wsTask)
     }
     else {
@@ -28,8 +29,13 @@ export const createWs = (requestCode) => {
         })
         task.onClose(function (e) {
           console.log('onClose: ', e)
+          wx.reLaunch({
+            url: 'pages/index/index'
+          })
         })
       })
     }
   });
 }
+
+
