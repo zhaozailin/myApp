@@ -25,6 +25,7 @@ export const changeBottomTab = (cur) => {
   console.log(cur);
 }
 
+// 工单管理tab列表
 export const initOrderTabList = () => {
   // 管理员
   if (Taro.getStorageSync('auth') === authCode.manager) {
@@ -127,4 +128,64 @@ export const initOrderTabCurForConsume = () => {
   if (Taro.getStorageSync('auth') === authCode.employe) {
     return 1;
   }
+}
+
+// 门店管理tab列表
+export const initShopTabList = () => {
+  // 管理员
+  if (Taro.getStorageSync('auth') === authCode.manager) {
+    return [
+      {title: '门店列表'},
+      {title: '门店审核'},
+      // {title: '员工管理'},
+      // {title: '商品管理'}
+    ]
+  }
+  // 店长
+  if (Taro.getStorageSync('auth') === authCode.shopOwner) {
+    return [
+      {title: '员工管理'},
+      {title: '商品管理'}
+    ]
+  }
+  // 员工
+  if (Taro.getStorageSync('auth') === authCode.employe) {
+    return [
+      {title: '员工管理'},
+    ]
+  }
+  return []
+}
+
+export const changeShopTab = (cur) => {
+  let url;
+
+  // 管理员
+  if (Taro.getStorageSync('auth') === authCode.manager) {
+    if (cur === 0) {
+      url = '/pages/shopListManage/index'
+    }
+    else if (cur === 1) {
+      url = '/pages/shopCheckList/index'
+    }
+  }
+  // 店长
+  else if (Taro.getStorageSync('auth') === authCode.shopOwner) {
+    if (cur === 0) {
+      url = '/pages/employeListManage/index'
+    }
+    else if (cur === 1) {
+      url = '/pages/productListManage/index'
+    }
+  }
+  // 员工
+  if (Taro.getStorageSync('auth') === authCode.employe) {
+    if (cur === 0) {
+      url = '/pages/employeListManage/index'
+    }
+  }
+
+  Taro.redirectTo({
+    url
+  })
 }

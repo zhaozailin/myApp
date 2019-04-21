@@ -14,7 +14,7 @@ export default class ConsumeRecordList extends Component {
   }
 
   config = {
-    navigationBarTitleText: '消费记录',
+    navigationBarTitleText: '工单管理',
     enablePullDownRefresh: true,
   }
 

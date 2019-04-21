@@ -14,7 +14,7 @@ export default class ChargeRecordList extends Component {
   }
 
   config = {
-    navigationBarTitleText: '充值记录',
+    navigationBarTitleText: '工单管理',
     enablePullDownRefresh: true,
   }
 

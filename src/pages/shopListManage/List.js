@@ -12,15 +12,11 @@ export default class List extends Component {
     oriList: [],
   }
 
-  config = {
-    navigationBarTitleText: '门店管理'
-  }
-
   componentDidMount() {
     this.queryList();
   }
 
-  queryList = () => {
+  queryList = (callback) => {
     this.setState({
       list: [],
       oriList: [],
@@ -31,6 +27,8 @@ export default class List extends Component {
         this.setState({
           list,
           oriList: list
+        }, () => {
+          callback && callback()
         })
       })
     })

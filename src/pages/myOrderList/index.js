@@ -14,7 +14,7 @@ export default class MyOrderList extends Component {
   }
 
   config = {
-    navigationBarTitleText: '我的订单',
+    navigationBarTitleText: '工单管理',
     enablePullDownRefresh: true,
   }
 

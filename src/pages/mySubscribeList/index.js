@@ -14,7 +14,7 @@ export default class MySubscribeList extends Component {
   }
 
   config = {
-    navigationBarTitleText: '我的预约',
+    navigationBarTitleText: '工单管理',
     enablePullDownRefresh: true,
   }
 
