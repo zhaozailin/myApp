@@ -1,9 +1,10 @@
 import Taro, {Component} from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import {AtCard, AtSearchBar} from 'taro-ui'
+import {View} from '@tarojs/components'
+import {AtCard, AtSearchBar, AtTabBar, AtTabs} from 'taro-ui'
 import authCode from '../../config/authCode'
 import {queryChargeRecordList} from '../../request/productOrderManage'
-import './index.less'
+import './index.less';
+import {initBottomTabList, changeBottomTab, initOrderTabList, changeOrderTab, initOrderTabCurForCharge} from "../../utils/uiUtils";
 
 export default class ChargeRecordList extends Component {
   state = {
@@ -13,18 +14,31 @@ export default class ChargeRecordList extends Component {
   }
 
   config = {
-    navigationBarTitleText: '工单管理'
+    navigationBarTitleText: '充值记录',
+    enablePullDownRefresh: true,
   }
 
-  componentDidMount() {
+  onPullDownRefresh() {
+    this.queryList(() => {
+      wx.stopPullDownRefresh();
+    })
+  }
+
+  queryList = (callback) => {
     queryChargeRecordList({
       shopId: (Taro.getStorageSync('auth') === authCode.shopOwner) ? Taro.getStorageSync('shopId') : 0
     }).then((list) => {
       this.setState({
         list,
         oriList: list
+      }, () => {
+        callback && callback();
       })
     })
+  }
+
+  componentDidMount() {
+    this.queryList()
   }
 
   search = () => {
@@ -55,28 +69,43 @@ export default class ChargeRecordList extends Component {
 
   render() {
     return (
-      <View className='mol-wrap'>
-        <AtSearchBar
-          value={this.state.searchkey}
-          onChange={this.changeSearchInput}
-          onActionClick={this.search}
+      <View className='m-wrap'>
+        <AtTabs swipeable={false} current={initOrderTabCurForCharge()} tabList={initOrderTabList()} onClick={(cur) => {
+          changeOrderTab(cur)
+        }}/>
+
+        <View className='mol-wrap'>
+          <AtSearchBar
+            value={this.state.searchkey}
+            onChange={this.changeSearchInput}
+            onActionClick={this.search}
+          />
+          {
+            this.state.list.map(ele => {
+              return (
+                <View key={ele.id} className='mol-ele'>
+                  <AtCard
+                    title={ele.productName}
+                  >
+                    <View>微信昵称：{ele.name}</View>
+                    <View>手机：{ele.phone}</View>
+                    <View>充值金额：{ele.amount}</View>
+                    <View>充值时间：{ele.createTime}</View>
+                  </AtCard>
+                </View>
+              )
+            })
+          }
+        </View>
+
+        <AtTabBar
+          fixed
+          tabList={initBottomTabList()}
+          onClick={(cur) => {
+            changeBottomTab(cur)
+          }}
+          current={0}
         />
-        {
-          this.state.list.map(ele => {
-            return (
-              <View key={ele.id} className='mol-ele'>
-                <AtCard
-                  title={ele.productName}
-                >
-                  <View>微信昵称：{ele.name}</View>
-                  <View>手机：{ele.phone}</View>
-                  <View>充值金额：{ele.amount}</View>
-                  <View>充值时间：{ele.createTime}</View>
-                </AtCard>
-              </View>
-            )
-          })
-        }
       </View>
     )
   }

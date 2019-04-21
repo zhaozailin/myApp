@@ -106,3 +106,14 @@ export const initOrderTabCurForSubscribe = () => {
   }
   return 0;
 }
+
+// 判断'充值记录'在当前tab中的索引
+export const initOrderTabCurForCharge = () => {
+  if (Taro.getStorageSync('auth') === authCode.manager) {
+    return 0;
+  }
+  if (Taro.getStorageSync('auth') === authCode.shopOwner) {
+    return 2;
+  }
+  return 0;
+}

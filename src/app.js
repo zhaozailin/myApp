@@ -18,6 +18,7 @@ class App extends Component {
       'pages/toMother/index',
       'pages/myOrderList/index',
       'pages/mySubscribeList/index',
+      'pages/chargeRecordList/index',
     ],
 
     window: {
