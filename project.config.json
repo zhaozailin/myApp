@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -56,6 +56,13 @@
 					"id": 3,
 					"name": "我的订单",
 					"pathName": "pages/myOrderList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "我的预约",
+					"pathName": "pages/mySubscribeList/index",
 					"query": "",
 					"scene": null
 				}

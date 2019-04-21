@@ -6,7 +6,7 @@ let wsTask;
 export const createWs = (requestCode) => {
   return new Promise((resolve) => {
     console.log(wsTask)
-    if (wsTask && wsTask.OPEN) {
+    if (wsTask && wsTask.readyState === 1) {
       resolve(wsTask)
     }
     else {
@@ -29,9 +29,6 @@ export const createWs = (requestCode) => {
         })
         task.onClose(function (e) {
           console.log('onClose: ', e)
-          wx.reLaunch({
-            url: 'pages/index/index'
-          })
         })
       })
     }

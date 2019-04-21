@@ -53,5 +53,56 @@ export const initOrderTabList = () => {
 }
 
 export const changeOrderTab = (cur) => {
-  console.log(cur)
+  let url;
+
+  // 管理员
+  if (Taro.getStorageSync('auth') === authCode.manager) {
+    if (cur === 0) {
+      url = '/pages/chargeRecordList/index'
+    }
+    else if (cur === 1) {
+      url = '/pages/consumeRecordList/index'
+    }
+  }
+  // 店长
+  else if (Taro.getStorageSync('auth') === authCode.shopOwner) {
+    if (cur === 0) {
+      url = '/pages/myOrderList/index'
+    }
+    else if (cur === 1) {
+      url = '/pages/mySubscribeList/index'
+    }
+    else if (cur === 2) {
+      url = '/pages/chargeRecordList/index'
+    }
+    else if (cur === 3) {
+      url = '/pages/consumeRecordList/index'
+    }
+  }
+  // 员工
+  if (Taro.getStorageSync('auth') === authCode.employe) {
+    if (cur === 0) {
+      url = '/pages/mySubscribeList/index'
+    }
+    else if (cur === 1) {
+      url = '/pages/consumeRecordList/index'
+    }
+  }
+
+  Taro.redirectTo({
+    url
+  })
+}
+
+// 判断'我的预约'在当前tab中的索引
+export const initOrderTabCurForSubscribe = () => {
+  // 店长
+  if (Taro.getStorageSync('auth') === authCode.shopOwner) {
+    return 1;
+  }
+  // 员工
+  if (Taro.getStorageSync('auth') === authCode.employe) {
+    return 0;
+  }
+  return 0;
 }
