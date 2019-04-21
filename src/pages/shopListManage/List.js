@@ -66,7 +66,8 @@ export default class List extends Component {
     this.props.showCreate(ele)
   }
 
-  changeState = (ele) => {
+  changeState = (ele, e) => {
+    e.stopPropagation();
     changeState({
       shopId: ele.id,
       active: ele.active ? 0 : 1
