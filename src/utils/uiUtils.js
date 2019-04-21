@@ -104,7 +104,6 @@ export const initOrderTabCurForSubscribe = () => {
   if (Taro.getStorageSync('auth') === authCode.employe) {
     return 0;
   }
-  return 0;
 }
 
 // 判断'充值记录'在当前tab中的索引
@@ -115,5 +114,17 @@ export const initOrderTabCurForCharge = () => {
   if (Taro.getStorageSync('auth') === authCode.shopOwner) {
     return 2;
   }
-  return 0;
+}
+
+// 判断'消费记录'在当前tab中的索引
+export const initOrderTabCurForConsume = () => {
+  if (Taro.getStorageSync('auth') === authCode.manager) {
+    return 1;
+  }
+  if (Taro.getStorageSync('auth') === authCode.shopOwner) {
+    return 3;
+  }
+  if (Taro.getStorageSync('auth') === authCode.employe) {
+    return 1;
+  }
 }

@@ -19,6 +19,7 @@ class App extends Component {
       'pages/myOrderList/index',
       'pages/mySubscribeList/index',
       'pages/chargeRecordList/index',
+      'pages/consumeRecordList/index',
     ],
 
     window: {
