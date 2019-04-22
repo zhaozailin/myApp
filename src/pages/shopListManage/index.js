@@ -13,7 +13,7 @@ import {
 
 export default class ShopListManage extends Component {
   state = {
-    showList: true,
+    showList: false,
     shop: {}
   }
 
@@ -34,6 +34,7 @@ export default class ShopListManage extends Component {
   }
 
   render() {
+    let self = this;
     console.log(this.state.showList)
     return (
       <View className='m-wrap'>
@@ -49,7 +50,7 @@ export default class ShopListManage extends Component {
             })
           }}/>}
           {!this.state.showList && <Create shop={this.state.shop} back={() => {
-            this.setState({showList: true})
+            self.setState({showList: true})
           }}/>}
         </View>
 

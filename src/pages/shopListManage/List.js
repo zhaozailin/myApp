@@ -12,9 +12,10 @@ export default class List extends Component {
     oriList: [],
   }
 
-  componentDidMount() {
-    this.queryList();
-  }
+  // componentDidMount() {
+  //   console.log('list')
+  //   this.queryList();
+  // }
 
   queryList = (callback) => {
     this.setState({

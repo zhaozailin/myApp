@@ -18,20 +18,20 @@ export default class Create extends Component {
     isEdit: false,
   }
 
-  componentDidMount() {
-    if (this.props.shop.id) {
-      let shopInfo = Object.assign({}, this.props.shop)
-      this.setState({
-        isEdit: true,
-        id: shopInfo.id,
-        name: shopInfo.shopowner_name,
-        identity_cards: shopInfo.shopowner_identity_cards,
-        shop_address: shopInfo.addr,
-        shop_name: shopInfo.name,
-        expiredate: shopInfo.expiredate,
-      })
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.shop.id) {
+  //     let shopInfo = Object.assign({}, this.props.shop)
+  //     this.setState({
+  //       isEdit: true,
+  //       id: shopInfo.id,
+  //       name: shopInfo.shopowner_name,
+  //       identity_cards: shopInfo.shopowner_identity_cards,
+  //       shop_address: shopInfo.addr,
+  //       shop_name: shopInfo.name,
+  //       expiredate: shopInfo.expiredate,
+  //     })
+  //   }
+  // }
 
   changeName = (name) => {
     this.setState({
