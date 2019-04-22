@@ -4,6 +4,7 @@ import {AtInput, AtButton} from 'taro-ui'
 import './index.less'
 import {checkPhone} from "../../utils/validator";
 import {createShop, editShop} from "../../request/shopProductManage";
+import {getTimeForYYYYMMDD} from "../../utils/timeUtils";
 
 export default class Create extends Component {
   state = {
@@ -13,7 +14,7 @@ export default class Create extends Component {
     shop_address: '',
     shop_name: '',
     phone: '',
-    expiredate: '',
+    expiredate: getTimeForYYYYMMDD(),
 
     isEdit: false,
   }
@@ -84,7 +85,7 @@ export default class Create extends Component {
       Taro.showToast({title: '门店名字不能为空', icon: 'none'})
       return false;
     }
-    if (this.state.isEdit && !this.state.expiredate) {
+    if (!this.state.expiredate) {
       Taro.showToast({title: '过期日期不能为空', icon: 'none'})
       return false;
     }
@@ -115,7 +116,8 @@ export default class Create extends Component {
           shop_address: this.state.shop_address,
           shop_name: this.state.shop_name,
           phone: this.state.phone,
-          password: this.state.phone.slice(-6)
+          password: this.state.phone.slice(-6),
+          expiredate: this.state.expiredate,
         }).then(() => {
           Taro.showToast({title: '新增成功', icon: 'none'})
           this.props.onBack();
@@ -175,7 +177,6 @@ export default class Create extends Component {
           value={this.state.shop_name}
           onChange={this.changeShop}
         />
-        {this.state.isEdit &&
         <View>
           <Picker mode='date' onChange={this.onDateChange}>
             <View className='picker slm-date'>
@@ -184,7 +185,6 @@ export default class Create extends Component {
             </View>
           </Picker>
         </View>
-        }
         <View className='slm-btn-wrap'>
           <AtButton type='primary' onClick={this.toSave}>保存</AtButton>
         </View>
