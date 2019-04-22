@@ -1,8 +1,9 @@
 import Taro, {Component} from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import {View} from '@tarojs/components'
 import {AtInput, AtButton} from 'taro-ui'
 import {login} from '../../request/user'
 import './index.less'
+import authCode from "../../config/authCode";
 
 export default class Login extends Component {
   state = {
@@ -38,6 +39,28 @@ export default class Login extends Component {
     return true;
   }
 
+  // 登录之后的跳转
+  afterLogin = () => {
+    let url;
+
+    // 管理员
+    if (Taro.getStorageSync('auth') === authCode.manager) {
+      url = '/pages/chargeRecordList/index'
+    }
+    // 店长
+    else if (Taro.getStorageSync('auth') === authCode.shopOwner) {
+      url = '/pages/myOrderList/index'
+    }
+    // 员工
+    if (Taro.getStorageSync('auth') === authCode.employe) {
+      url = '/pages/mySubscribeList/index'
+    }
+
+    Taro.redirectTo({
+      url
+    })
+  }
+
   toLogin = () => {
     if (this.checkLogin()) {
       login({
@@ -50,9 +73,7 @@ export default class Login extends Component {
         Taro.setStorageSync('shopId', result.shopId)
         Taro.setStorageSync('username', this.state.username)
 
-        Taro.redirectTo({
-          url: '/pages/main/index'
-        })
+        this.afterLogin();
       })
     }
   }
