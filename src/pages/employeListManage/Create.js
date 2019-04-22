@@ -52,7 +52,7 @@ export default class Create extends Component {
           shop_id: Taro.getStorageSync('shopId')
         }).then(() => {
           Taro.showToast({title: '修改成功', icon: 'none'})
-          this.props.back();
+          this.props.onBack();
         });
       }
       // 新增
@@ -66,7 +66,7 @@ export default class Create extends Component {
           shop_id: Taro.getStorageSync('shopId')
         }).then(() => {
           Taro.showToast({title: '新增成功', icon: 'none'})
-          this.props.back();
+          this.props.onBack();
         });
       }
     }
@@ -153,7 +153,7 @@ export default class Create extends Component {
         </View>
         <View className='slm-return-btn-wrap'>
           <AtButton type='secondary' onClick={() => {
-            this.props.back();
+            this.props.onBack();
           }}>返回</AtButton>
         </View>
       </View>

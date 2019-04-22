@@ -60,7 +60,7 @@ export default class Edit extends Component {
         url: this.props.product.url,
         name: this.props.product.name,
       }).then(() => {
-        this.props.back();
+        this.props.onBack();
       })
     }
   }
@@ -75,7 +75,7 @@ export default class Edit extends Component {
         url: this.props.product.url,
         name: this.props.product.name,
       }).then(() => {
-        this.props.back();
+        this.props.onBack();
       })
     }
   }
@@ -127,7 +127,7 @@ export default class Edit extends Component {
         </View>
         <View className='slm-return-btn-wrap'>
           <AtButton type='secondary' onClick={() => {
-            this.props.back();
+            this.props.onBack();
           }}>返回</AtButton>
         </View>
       </View>

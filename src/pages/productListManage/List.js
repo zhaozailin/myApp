@@ -73,7 +73,7 @@ export default class List extends Component {
 
   toEdit = (ele) => {
     if (Taro.getStorageSync('auth') === authCode.shopOwner) {
-      this.props.showEdit(ele);
+      this.props.onShowEdit(ele);
     }
   }
 

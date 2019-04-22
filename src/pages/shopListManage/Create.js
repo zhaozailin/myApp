@@ -18,20 +18,20 @@ export default class Create extends Component {
     isEdit: false,
   }
 
-  // componentDidMount() {
-  //   if (this.props.shop.id) {
-  //     let shopInfo = Object.assign({}, this.props.shop)
-  //     this.setState({
-  //       isEdit: true,
-  //       id: shopInfo.id,
-  //       name: shopInfo.shopowner_name,
-  //       identity_cards: shopInfo.shopowner_identity_cards,
-  //       shop_address: shopInfo.addr,
-  //       shop_name: shopInfo.name,
-  //       expiredate: shopInfo.expiredate,
-  //     })
-  //   }
-  // }
+  componentDidMount() {
+    if (this.props.shop.id) {
+      let shopInfo = Object.assign({}, this.props.shop)
+      this.setState({
+        isEdit: true,
+        id: shopInfo.id,
+        name: shopInfo.shopowner_name,
+        identity_cards: shopInfo.shopowner_identity_cards,
+        shop_address: shopInfo.addr,
+        shop_name: shopInfo.name,
+        expiredate: shopInfo.expiredate,
+      })
+    }
+  }
 
   changeName = (name) => {
     this.setState({
@@ -104,7 +104,7 @@ export default class Create extends Component {
           expiredate: this.state.expiredate,
         }).then(() => {
           Taro.showToast({title: '修改成功', icon: 'none'})
-          this.props.back();
+          this.props.onBack();
         });
       }
       // 新增
@@ -118,7 +118,7 @@ export default class Create extends Component {
           password: this.state.phone.slice(-6)
         }).then(() => {
           Taro.showToast({title: '新增成功', icon: 'none'})
-          this.props.back();
+          this.props.onBack();
         });
       }
     }
@@ -190,7 +190,7 @@ export default class Create extends Component {
         </View>
         <View className='slm-return-btn-wrap'>
           <AtButton type='secondary' onClick={() => {
-            this.props.back();
+            this.props.onBack();
           }}>返回</AtButton>
         </View>
       </View>

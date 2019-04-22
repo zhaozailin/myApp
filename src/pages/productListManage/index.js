@@ -42,13 +42,13 @@ export default class ProductListManage extends Component {
         }}/>
 
         <View className='mol-wrap'>
-          {this.state.showList && <List ref={(obj) => {this.listRef = obj}} showEdit={(product) => {
+          {this.state.showList && <List ref={(obj) => {this.listRef = obj}} onShowEdit={(product) => {
             this.setState({
               product,
               showList: false
             })
           }}/>}
-          {!this.state.showList && <Edit product={this.state.product} back={() => {
+          {!this.state.showList && <Edit product={this.state.product} onBack={() => {
             this.setState({showList: true})
           }}/>}
         </View>

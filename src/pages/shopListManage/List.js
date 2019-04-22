@@ -12,10 +12,10 @@ export default class List extends Component {
     oriList: [],
   }
 
-  // componentDidMount() {
-  //   console.log('list')
-  //   this.queryList();
-  // }
+  componentWillMount() {
+    console.log('list')
+    this.queryList();
+  }
 
   queryList = (callback) => {
     this.setState({
@@ -62,7 +62,7 @@ export default class List extends Component {
   }
 
   toEdit = (ele) => {
-    this.props.showCreate(ele)
+    this.props.onShowCreate(ele)
   }
 
   changeState = (ele, e) => {
@@ -81,7 +81,7 @@ export default class List extends Component {
       <View>
         <View className='slm-btn-wrap'>
           <AtButton type='primary' onClick={() => {
-            this.props.showCreate();
+            this.props.onShowCreate();
           }}>添加</AtButton>
         </View>
         <AtSearchBar

@@ -44,13 +44,13 @@ export default class EmployeListManage extends Component {
         }}/>
 
         <View className='mol-wrap'>
-          {this.state.showList && <List ref={(obj) => {this.listRef = obj}} showCreate={(employe) => {
+          {this.state.showList && <List ref={(obj) => {this.listRef = obj}} onShowCreate={(employe) => {
             this.setState({showList: false})
             this.setState({
               employe: employe || {}
             })
           }}/>}
-          {(!this.state.showList) && <Create employe={this.state.employe} back={() => {
+          {(!this.state.showList) && <Create employe={this.state.employe} onBack={() => {
             this.setState({showList: true})
           }}/>}
         </View>

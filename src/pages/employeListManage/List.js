@@ -75,7 +75,7 @@ export default class List extends Component {
   toEdit = (ele) => {
     // 只有店长才能编辑
     if (Taro.getStorageSync('auth') === authCode.shopOwner) {
-      this.props.showCreate(ele)
+      this.props.onShowCreate(ele)
     }
   }
 
@@ -86,7 +86,7 @@ export default class List extends Component {
           Taro.getStorageSync('auth') === authCode.shopOwner &&
           <View className='slm-btn-wrap'>
             <AtButton type='primary' onClick={() => {
-              this.props.showCreate();
+              this.props.onShowCreate();
             }}>添加</AtButton>
           </View>
         }
