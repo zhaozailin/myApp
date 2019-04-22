@@ -62,7 +62,7 @@ export default class Create extends Component {
           identity_cards: this.state.identity_cards,
           phone: this.state.phone,
           active_status: this.state.active_status ? 1 : 0,
-          password: this.state.phone.slice(-4),
+          password: this.state.phone.slice(-5),
           shop_id: Taro.getStorageSync('shopId')
         }).then(() => {
           Taro.showToast({title: '新增成功', icon: 'none'})
