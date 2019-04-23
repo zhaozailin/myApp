@@ -24,6 +24,12 @@ export const parseResult = (requestCode, result) => {
   if (resultJson.code === 106) {
     Taro.showToast({title: '该员工手机号已经被注册', icon: 'none'})
   }
+  if (resultJson.code === 500) {
+    Taro.showToast({title: '改门店正在审核中', icon: 'none'})
+  }
+  if (resultJson.code === 501) {
+    Taro.showToast({title: '您的账号已经被禁用', icon: 'none'})
+  }
 };
 
 export const packRequest = (params, requestId) => {
