@@ -92,6 +92,7 @@ export default class ConsumeRecordList extends Component {
                     <View>消费金额：{ele.amount}</View>
                     <View>操作员：{ele.operatorName}</View>
                     <View>消费时间：{ele.customeTime}</View>
+                    <View>消费门店：{ele.shopName}</View>
                   </AtCard>
                 </View>
               )

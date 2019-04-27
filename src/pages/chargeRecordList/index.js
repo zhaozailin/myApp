@@ -91,6 +91,7 @@ export default class ChargeRecordList extends Component {
                     <View>手机：{ele.phone}</View>
                     <View>充值金额：{ele.amount}</View>
                     <View>充值时间：{ele.createTime}</View>
+                    <View>充值门店：{ele.shopName}</View>
                   </AtCard>
                 </View>
               )
