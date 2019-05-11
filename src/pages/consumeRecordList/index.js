@@ -89,9 +89,9 @@ export default class ConsumeRecordList extends Component {
                   >
                     <View>微信昵称：{ele.name}</View>
                     <View>手机：{ele.phone}</View>
-                    <View>消费金额：{ele.amount}</View>
+                    <View>消费次数：{ele.subscribeCount}</View>
                     <View>操作员：{ele.operatorName}</View>
-                    <View>消费时间：{ele.customeTime}</View>
+                    <View>消费时间：{ele.customerTime}</View>
                     <View>消费门店：{ele.shopName}</View>
                   </AtCard>
                 </View>

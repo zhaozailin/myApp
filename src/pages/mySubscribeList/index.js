@@ -29,16 +29,23 @@ export default class MySubscribeList extends Component {
   }
 
   queryList = (callback) => {
-    querySubscribeList({
-      shopId: Taro.getStorageSync('shopId')
-    }).then((list) => {
-      this.setState({
-        list,
-        oriList: list
-      }, () => {
-        callback && callback()
+    this.setState({
+      list: [],
+      oriList: [],
+    }, () => {
+      querySubscribeList({
+        shopId: Taro.getStorageSync('shopId')
+      }).then((list) => {
+        console.log(list)
+        this.setState({
+          list,
+          oriList: list
+        }, () => {
+          callback && callback()
+        })
       })
     })
+
   }
 
   search = () => {

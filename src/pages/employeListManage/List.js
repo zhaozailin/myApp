@@ -110,7 +110,7 @@ export default class List extends Component {
                     {
                       Taro.getStorageSync('auth') !== authCode.employe &&
                       <View className='at-col at-col-3'>
-                        <Button type='primary' size='mini' onClick={this.changeStatus.bind(this, ele)}>{ele.active_status ? '禁用' : '启用'}</Button>
+                        <Button type='primary' size='mini' onClick={this.changeStatus.bind(this, ele)}>{ele.active_status ? '启用' : '禁用'}</Button>
                       </View>
                     }
                   </View>

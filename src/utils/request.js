@@ -18,6 +18,9 @@ export const parseResult = (requestCode, result) => {
   if (resultJson.code === 101) {
     Taro.showToast({title: '该店长手机号已经被注册', icon: 'none'})
   }
+  if (resultJson.code === 102) {
+    Taro.showToast({title: '用户已注册', icon: 'none'})
+  }
   if (resultJson.code === 103) {
     Taro.showToast({title: '该门店正在审核中', icon: 'none'})
   }

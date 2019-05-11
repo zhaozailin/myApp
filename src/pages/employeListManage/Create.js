@@ -48,7 +48,7 @@ export default class Create extends Component {
           id: this.state.id,
           name: this.state.name,
           identity_cards: this.state.identity_cards,
-          active_status: this.state.active_status ? 1 : 0,
+          active_status: this.state.active_status ? 0 : 1,
           shop_id: Taro.getStorageSync('shopId')
         }).then(() => {
           Taro.showToast({title: '修改成功', icon: 'none'})
@@ -61,7 +61,7 @@ export default class Create extends Component {
           name: this.state.name,
           identity_cards: this.state.identity_cards,
           phone: this.state.phone,
-          active_status: this.state.active_status ? 1 : 0,
+          active_status: this.state.active_status ? 0 : 1,
           password: this.state.phone.slice(-5),
           shop_id: Taro.getStorageSync('shopId')
         }).then(() => {
@@ -81,7 +81,7 @@ export default class Create extends Component {
         name: info.name,
         identity_cards: info.identity_cards,
         phone: info.phone,
-        active_status: !!info.active_status,
+        active_status: !info.active_status,
       })
     }
   }
@@ -144,7 +144,7 @@ export default class Create extends Component {
           <AtListItem
             title='状态'
             isSwitch
-            switchIsCheck={this.state.active_status}
+            switchIsCheck={!this.state.active_status}
             onSwitchChange={this.changeState}
           />
         </AtList>
