@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Button} from '@tarojs/components'
-import {AtList, AtButton, AtListItem, AtTabBar} from 'taro-ui'
+import {View, Button, Image} from '@tarojs/components'
+import {AtList, AtButton, AtListItem, AtTabBar, AtCurtain} from 'taro-ui'
 import {queryShopInfo, renewSuccess} from '../../request/user'
 import {pay} from '../../utils/payUtils'
 import './index.less'
@@ -8,7 +8,9 @@ import {changeBottomTab, initBottomTabList} from "../../utils/uiUtils";
 
 export default class MyShop extends Component {
   state = {
-    detail: {}
+    detail: {},
+    showCode: false,
+    codeUrl: ''
   }
 
   config = {
@@ -78,6 +80,24 @@ export default class MyShop extends Component {
     })
   }
 
+  getWxacode = () => {
+    Taro.request({
+      url: 'https://1wang.xyz/wxacode?shopId=' + Taro.getStorageSync('shopId'),
+      success: (res) => {
+        this.setState({
+          codeUrl: res.data.url,
+          showCode: true
+        })
+      }
+    })
+  }
+
+  closeCode = () => {
+    this.setState({
+      showCode: false
+    })
+  }
+
   render() {
     return (
       <View className='m-wrap'>
@@ -95,9 +115,12 @@ export default class MyShop extends Component {
           }
           <View className='ms-btn-wrap'>
             <View className='ms-btn-share'>
-              <Button type='primary' id={'plat'} openType='share'>分享门店平台给别人</Button>
+              <Button type='primary' id={'plat'} openType='share'>推荐门店</Button>
             </View>
-            <Button id={'shop'} openType='share'>分享我的门店给用户</Button>
+            <Button id={'shop'} openType='share'>推广我的门店</Button>
+            <View className='ms-btn-share'>
+              <Button onClick={this.getWxacode}>获取小程序码</Button>
+            </View>
           </View>
         </View>
 
@@ -109,6 +132,16 @@ export default class MyShop extends Component {
           }}
           current={2}
         />
+
+        <AtCurtain
+          isOpened={this.state.showCode}
+          onClose={this.closeCode.bind(this)}
+        >
+          <Image
+            style='width:100%;height:250px'
+            src={this.state.codeUrl}
+          />
+        </AtCurtain>
       </View>
     )
   }
