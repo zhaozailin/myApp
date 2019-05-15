@@ -138,7 +138,8 @@ export default class MyShop extends Component {
           onClose={this.closeCode.bind(this)}
         >
           <Image
-            style='width:100%;height:250px'
+            mode={'widthFix'}
+            style='width:100%'
             src={this.state.codeUrl}
           />
         </AtCurtain>
