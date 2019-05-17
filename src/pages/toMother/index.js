@@ -18,44 +18,36 @@ export default class ToMother extends Component {
   }
 
   componentWillMount() {
-    // 判断用户是否已经授权
-    Taro.getSetting().then((res) => {
-      // 已授权
-      if (res.authSetting['scope.userInfo']) {
-        // 获取登录用户信息
-        Taro.getUserInfo().then((res2) => {
-          this.setState({
-            nickname: encodeURIComponent(res2.userInfo.nickName),
-            avatarUrl: encodeURIComponent(res2.userInfo.avatarUrl),
-            weAuth: 1,
-          })
-        })
-      }
-      else {
-        Taro.showToast({title: '请先进行授权操作', icon: 'none'})
-        this.setState({
-          weAuth: 0
-        })
-      }
-    })
-  }
-
-  componentDidMount() {
-    wx.login({
-      success: (r) => {
-        console.log(r);
-      }
-    })
     this.setState({
       shopId: this.$router.params.shopId
     })
-
     // 获取openId
     getOpenId(openId => {
-      this.setState({
-        openId
+      // 判断用户是否已经授权
+      Taro.getSetting().then((res) => {
+        // 已授权
+        if (res.authSetting['scope.userInfo']) {
+          // 获取登录用户信息
+          Taro.getUserInfo().then((res2) => {
+            console.log(res2)
+            this.setState({
+              nickname: encodeURIComponent(res2.userInfo.nickName),
+              avatarUrl: encodeURIComponent(res2.userInfo.avatarUrl),
+              openId: openId,
+              weAuth: 1,
+            })
+          })
+        }
+        else {
+          Taro.showToast({title: '请先进行授权操作', icon: 'none'})
+          this.setState({
+            weAuth: 0,
+            openId: openId
+          })
+        }
       })
     })
+
   }
 
   enter = () => {
@@ -81,7 +73,7 @@ export default class ToMother extends Component {
           <Button className='auth-enter-btn' type='primary' onClick={this.enter}>点击进入</Button>
         </View>
         }
-        {this.state.weAuth === 1 && <web-view src={'https://1wang.xyz?openId=' + this.state.openId + '&shopId=' + this.state.shopId +'&nickname=' + this.state.nickname + '&avatarUrl=' + this.state.avatarUrl + '#/main'}/>}
+        {this.state.weAuth === 1 && <web-view src={'https://1wang.xyz?r=' + Date.now() + '&openId=' + this.state.openId + '&shopId=' + this.state.shopId +'&nickname=' + this.state.nickname + '&avatarUrl=' + this.state.avatarUrl + '#/main'}/>}
       </View>
     )
   }
