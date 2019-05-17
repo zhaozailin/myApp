@@ -125,7 +125,7 @@ export default class Edit extends Component {
         <View className='slm-return-btn-wrap'>
           <AtButton type='secondary' onClick={this.toEdit}>保存</AtButton>
         </View>
-        <View className='slm-return-btn-wrap'>
+        <View className='slm-return-btn-wrap slm-bottom-blank'>
           <AtButton type='secondary' onClick={() => {
             this.props.onBack();
           }}>返回</AtButton>
