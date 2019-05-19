@@ -1,6 +1,47 @@
 import Taro from '@tarojs/taro'
 import authCode from "../config/authCode";
 
+export const pageState = {
+  isOver: false,
+  pageNo: 1,
+  searchkey: '',
+  list: [],
+};
+
+// 刷新到第一页
+export const refreshToFirst = (obj, cb) => {
+  obj.setState({
+    isOver: false,
+    pageNo: 1,
+  }, () => {
+    obj.queryList((list) => {
+      obj.setState({
+        list,
+        isOver: list.length < pageSize
+      }, () => {
+        cb && cb();
+      })
+    })
+  })
+};
+
+export const scrollToLower = (obj) => {
+  if (!obj.state.isOver) {
+    obj.setState({
+      pageNo: obj.state.pageNo + 1
+    }, () => {
+      obj.queryList((list) => {
+        let newList = [...obj.state.list, ...list];
+        obj.setState({
+          list: newList
+        })
+      })
+    })
+  }
+};
+
+export const pageSize = 2;
+
 export const initBottomTabList = () => {
   // 管理员
   if (Taro.getStorageSync('auth') === authCode.manager) {

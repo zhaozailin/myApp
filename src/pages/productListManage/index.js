@@ -8,7 +8,8 @@ import {
   initBottomTabList,
   changeBottomTab,
   changeShopTab,
-  initShopTabList
+  initShopTabList,
+  refreshToFirst,
 } from "../../utils/uiUtils";
 
 
@@ -28,7 +29,7 @@ export default class ProductListManage extends Component {
       wx.stopPullDownRefresh();
     }
     else {
-      this.listRef.queryList(() => {
+      refreshToFirst(this.listRef, () => {
         wx.stopPullDownRefresh();
       })
     }

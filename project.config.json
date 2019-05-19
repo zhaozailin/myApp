@@ -32,7 +32,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 10,
 			"list": [
 				{
 					"id": -1,
@@ -80,6 +80,34 @@
 					"id": 6,
 					"name": "xxx",
 					"pathName": "pages/toMother/index",
+					"query": "shopId=33",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "充值记录",
+					"pathName": "pages/chargeRecordList/index",
+					"query": "shopId=33",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消费记录",
+					"pathName": "pages/consumeRecordList/index",
+					"query": "shopId=33",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品管理",
+					"pathName": "pages/productListManage/index",
+					"query": "shopId=33",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "门店列表",
+					"pathName": "pages/shopListManage/index",
 					"query": "shopId=33",
 					"scene": null
 				}

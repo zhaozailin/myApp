@@ -9,6 +9,7 @@ export default resolves;
 
 // 查询客户列表
 export const queryClientList = (params) => {
+  console.log(params)
   if (mock) {
     return Promise.resolve([
       {

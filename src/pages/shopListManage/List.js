@@ -1,63 +1,32 @@
 import Taro, {Component} from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, ScrollView } from '@tarojs/components'
 import 'taro-ui/dist/style/components/flex.scss'
 import {AtCard, AtSearchBar, AtButton} from 'taro-ui'
 import {queryShopList, changeState} from '../../request/shopProductManage'
+import {scrollToLower, refreshToFirst, pageState} from "../../utils/uiUtils";
 import './index.less'
+import '../../app.less'
 
 export default class List extends Component {
-  state = {
-    searchkey: '',
-    list: [],
-    oriList: [],
-  }
+  state = Object.assign(pageState, {});
 
-  componentWillMount() {
-    console.log('list')
-    this.queryList();
+  componentDidMount() {
+    refreshToFirst(this);
   }
 
   queryList = (callback) => {
-    this.setState({
-      list: [],
-      oriList: [],
-    }, () => {
-      queryShopList({
-        uId: Taro.getStorageSync('uId')
-      }).then((list) => {
-        this.setState({
-          list,
-          oriList: list
-        }, () => {
-          callback && callback()
-        })
-      })
+    queryShopList({
+      pageNo: this.state.pageNo,
+      key: this.state.searchkey,
+      uId: Taro.getStorageSync('uId')
+    }).then((list) => {
+      callback && callback(list);
     })
-  }
-
-  search = () => {
-    let key = this.state.searchkey;
-    if (key.trim()) {
-      let newList = [];
-      this.state.oriList.forEach((ele) => {
-        if (ele.name.indexOf(key) !== -1) {
-          newList.push(ele);
-        }
-      })
-      this.setState({
-        list: [...newList]
-      })
-    }
-    else {
-      this.setState({
-        list: [...this.state.oriList]
-      })
-    }
   }
 
   changeSearchInput = (searchkey) => {
     this.setState({
-      searchkey
+      searchkey: searchkey.trim()
     })
   }
 
@@ -72,7 +41,7 @@ export default class List extends Component {
       active: ele.active ? 0 : 1
     }).then(() => {
       Taro.showToast({title: '操作成功', icon: 'none'})
-      this.queryList();
+      refreshToFirst(this)
     })
   }
 
@@ -87,31 +56,39 @@ export default class List extends Component {
         <AtSearchBar
           value={this.state.searchkey}
           onChange={this.changeSearchInput}
-          onActionClick={this.search}
+          onActionClick={() => {refreshToFirst(this)}}
         />
-        {
-          this.state.list.map(ele => {
-            return (
-              <View key={ele.id} className='mol-ele' onClick={this.toEdit.bind(this, ele)}>
-                <AtCard
-                  title={ele.name}
-                >
-                  <View className='at-row'>
-                    <View className='at-col at-col-9'>
-                      <View>电话：{ele.phone}</View>
-                      <View>门店地址：{ele.addr}</View>
-                      <View>过期日期：{ele.expiredate}</View>
-                      <View>门店编号：{ele.id}</View>
+        <ScrollView
+          className={'com-scroll-view2'}
+          scrollY
+          onScrollToLower={() => {
+            scrollToLower(this)
+          }}
+        >
+          {
+            this.state.list.map(ele => {
+              return (
+                <View key={ele.id} className='mol-ele' onClick={this.toEdit.bind(this, ele)}>
+                  <AtCard
+                    title={ele.name}
+                  >
+                    <View className='at-row'>
+                      <View className='at-col at-col-9'>
+                        <View>电话：{ele.phone}</View>
+                        <View>门店地址：{ele.addr}</View>
+                        <View>过期日期：{ele.expiredate}</View>
+                        <View>门店编号：{ele.id}</View>
+                      </View>
+                      <View className='at-col at-col-3'>
+                        <Button type='primary' size='mini' onClick={this.changeState.bind(this, ele)}>{ele.active ? '禁用' : '启用'}</Button>
+                      </View>
                     </View>
-                    <View className='at-col at-col-3'>
-                      <Button type='primary' size='mini' onClick={this.changeState.bind(this, ele)}>{ele.active ? '禁用' : '启用'}</Button>
-                    </View>
-                  </View>
-                </AtCard>
-              </View>
-            )
-          })
-        }
+                  </AtCard>
+                </View>
+              )
+            })
+          }
+        </ScrollView>
       </View>
     )
   }

@@ -9,6 +9,7 @@ export default resolves;
 
 // 查询我的订单列表
 export const queryOrderList = (params) => {
+  console.log(params)
   if (mock) {
     return Promise.resolve([
       {
@@ -66,6 +67,7 @@ export const confirmOrder = (params) => {
 
 // 查询我的预定列表
 export const querySubscribeList = (params) => {
+  console.log(params)
   if (mock) {
     return Promise.resolve([
       {
@@ -123,6 +125,7 @@ export const confirmSubscribe = (params) => {
 
 // 查询用户的充值列表
 export const queryChargeRecordList = (params) => {
+  console.log(params)
   if (mock) {
     return Promise.resolve([
       {
@@ -177,6 +180,7 @@ export const queryChargeRecordList = (params) => {
 
 // 查询用户的消费列表
 export const queryConsumeRecordList = (params) => {
+  console.log(params)
   if (mock) {
     return Promise.resolve([
       {

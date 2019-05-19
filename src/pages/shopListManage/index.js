@@ -8,7 +8,8 @@ import {
   initBottomTabList,
   changeBottomTab,
   changeShopTab,
-  initShopTabList
+  initShopTabList,
+  refreshToFirst,
 } from "../../utils/uiUtils";
 
 export default class ShopListManage extends Component {
@@ -27,7 +28,7 @@ export default class ShopListManage extends Component {
       wx.stopPullDownRefresh();
     }
     else {
-      this.listRef.queryList(() => {
+      refreshToFirst(this.listRef, () => {
         wx.stopPullDownRefresh();
       })
     }
@@ -41,7 +42,7 @@ export default class ShopListManage extends Component {
           changeShopTab(cur)
         }}/>
 
-        <View className='mol-wrap'>
+        <View>
           {this.state.showList && <List ref={(obj) => {this.listRef = obj}} onShowCreate={(shop) => {
             this.setState({
               showList: false,

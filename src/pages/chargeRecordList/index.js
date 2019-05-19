@@ -1,17 +1,13 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View} from '@tarojs/components'
+import {View, ScrollView} from '@tarojs/components'
 import {AtCard, AtSearchBar, AtTabBar, AtTabs} from 'taro-ui'
 import authCode from '../../config/authCode'
 import {queryChargeRecordList} from '../../request/productOrderManage'
 import './index.less';
-import {initBottomTabList, changeBottomTab, initOrderTabList, changeOrderTab, initOrderTabCurForCharge} from "../../utils/uiUtils";
+import {initBottomTabList, changeBottomTab, initOrderTabList, changeOrderTab, initOrderTabCurForCharge, scrollToLower, refreshToFirst, pageState} from "../../utils/uiUtils";
 
 export default class ChargeRecordList extends Component {
-  state = {
-    searchkey: '',
-    list: [],
-    oriList: [],
-  }
+  state = Object.assign(pageState, {});
 
   config = {
     navigationBarTitleText: '工单管理',
@@ -19,51 +15,28 @@ export default class ChargeRecordList extends Component {
   }
 
   onPullDownRefresh() {
-    this.queryList(() => {
+    refreshToFirst(this, () => {
       wx.stopPullDownRefresh();
     })
   }
 
+  componentDidMount() {
+    refreshToFirst(this);
+  }
+
   queryList = (callback) => {
     queryChargeRecordList({
+      pageNo: this.state.pageNo,
+      key: this.state.searchkey,
       shopId: (Taro.getStorageSync('auth') === authCode.shopOwner) ? Taro.getStorageSync('shopId') : 0
     }).then((list) => {
-      this.setState({
-        list,
-        oriList: list
-      }, () => {
-        callback && callback();
-      })
+      callback && callback(list);
     })
-  }
-
-  componentDidMount() {
-    this.queryList()
-  }
-
-  search = () => {
-    let key = this.state.searchkey;
-    if (key.trim()) {
-      let newList = [];
-      this.state.oriList.forEach((ele) => {
-        if (ele.name.indexOf(key) !== -1 || ele.productName.indexOf(key) !== -1 || ele.phone === key) {
-          newList.push(ele);
-        }
-      })
-      this.setState({
-        list: [...newList]
-      })
-    }
-    else {
-      this.setState({
-        list: [...this.state.oriList]
-      })
-    }
   }
 
   changeSearchInput = (searchkey) => {
     this.setState({
-      searchkey
+      searchkey: searchkey.trim()
     })
   }
 
@@ -74,29 +47,37 @@ export default class ChargeRecordList extends Component {
           changeOrderTab(cur)
         }}/>
 
-        <View className='mol-wrap'>
+        <View>
           <AtSearchBar
             value={this.state.searchkey}
             onChange={this.changeSearchInput}
-            onActionClick={this.search}
+            onActionClick={() => {refreshToFirst(this)}}
           />
-          {
-            this.state.list.map(ele => {
-              return (
-                <View key={ele.id} className='mol-ele'>
-                  <AtCard
-                    title={ele.productName}
-                  >
-                    <View>微信昵称：{ele.name}</View>
-                    <View>手机：{ele.phone}</View>
-                    <View>充值金额：{ele.amount}</View>
-                    <View>充值时间：{ele.createTime}</View>
-                    <View>充值门店：{ele.shopName}</View>
-                  </AtCard>
-                </View>
-              )
-            })
-          }
+          <ScrollView
+            className='com-scroll-view'
+            scrollY
+            onScrollToLower={() => {
+              scrollToLower(this)
+            }}
+          >
+            {
+              this.state.list.map(ele => {
+                return (
+                  <View key={ele.id} className='mol-ele'>
+                    <AtCard
+                      title={ele.productName}
+                    >
+                      <View>微信昵称：{ele.name}</View>
+                      <View>手机：{ele.phone}</View>
+                      <View>充值金额：{ele.amount}</View>
+                      <View>充值时间：{ele.createTime}</View>
+                      <View>充值门店：{ele.shopName}</View>
+                    </AtCard>
+                  </View>
+                )
+              })
+            }
+          </ScrollView>
         </View>
 
         <AtTabBar

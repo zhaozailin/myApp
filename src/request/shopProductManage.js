@@ -9,6 +9,7 @@ export default resolves;
 
 // 查询门店列表
 export const queryShopList = (params) => {
+  console.log(params)
   params.check = 0;
   if (mock) {
     return Promise.resolve([
@@ -77,6 +78,7 @@ export const changeState = (params) => {
 
 // 查询门店审核列表
 export const queryShopCheckList = (params) => {
+  console.log(params)
   params.check = 1;
   if (mock) {
     return Promise.resolve([
@@ -135,6 +137,7 @@ export const confirmCheck = (params) => {
 
 // 查询员工列表
 export const queryEmployeList = (params) => {
+  console.log(params)
   if (mock) {
     return Promise.resolve([
       {
@@ -187,6 +190,7 @@ export const changeEmployeState = (params) => {
 
 // 查询产品列表
 export const queryProducList = (params) => {
+  console.log(params)
   if (mock) {
     return Promise.resolve([
       {
