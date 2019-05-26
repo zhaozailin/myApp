@@ -63,7 +63,7 @@ export default class MyShop extends Component {
   }
 
   toPay = () => {
-    let fee = 1;
+    let fee = 99800;
     pay(fee, '门店续费', () => {
       renewSuccess({
         shopId: Taro.getStorageSync('shopId')

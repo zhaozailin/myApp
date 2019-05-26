@@ -113,8 +113,6 @@ export default class Register extends Component {
   // 确认付款
   toPay = () => {
     let totalFee = this.state.amount;
-    // FIXME
-    totalFee = 1;
     pay(totalFee, '店长注册', () => {
       this.setState({payShow: false})
     })
@@ -123,7 +121,7 @@ export default class Register extends Component {
   changeYearNum = (yearNum) => {
     this.setState({
       yearNum,
-      amount: 500 * yearNum
+      amount: 99800 * yearNum
     })
   }
 

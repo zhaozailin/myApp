@@ -80,7 +80,7 @@ export default class List extends Component {
                         <View>门店编号：{ele.id}</View>
                       </View>
                       <View className='at-col at-col-3'>
-                        <Button type='primary' size='mini' onClick={this.changeState.bind(this, ele)}>{ele.active ? '禁用' : '启用'}</Button>
+                        <Button type='primary' size='mini' onClick={this.changeState.bind(this, ele)}>{ele.active ? '启用' : '禁用'}</Button>
                       </View>
                     </View>
                   </AtCard>

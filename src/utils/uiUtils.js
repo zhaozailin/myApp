@@ -13,6 +13,7 @@ export const refreshToFirst = (obj, cb) => {
   obj.setState({
     isOver: false,
     pageNo: 1,
+    list: [],
   }, () => {
     obj.queryList((list) => {
       obj.setState({
@@ -40,7 +41,7 @@ export const scrollToLower = (obj) => {
   }
 };
 
-export const pageSize = 2;
+export const pageSize = 10;
 
 export const initBottomTabList = () => {
   // 管理员
