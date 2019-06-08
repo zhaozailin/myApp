@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import Index from './pages/index/index'
 import './app.less'
 import './custom-theme.scss'
-import './taro-ui.css'
+import './style/index.scss'
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
